@@ -15,6 +15,7 @@ import { DIMENSIONS as D, type ArmPose, type LegPose, type StickmanPose } from "
 import { Fill, Stroke, ellipsePts, smoothClosed, type P2 } from "../shapes2d";
 import { SilContext, useSil, type SilMaterials } from "./materials";
 import { SilhouetteFace } from "./SilhouetteFace";
+import { Gown, HeadwearBack, HeadwearFront, Prop, type Costume, type PropId } from "./costume";
 
 export type SilhouettePalette = {
   body: string;
@@ -24,6 +25,8 @@ export type SilhouettePalette = {
   rope: string;
   feature: string;
   rim: string;
+  /** Linen headwear / apron colour (optional). */
+  headwear?: string;
 };
 
 /** Walter: black figure, muted brown tunic, warm amber rim. */
@@ -54,8 +57,14 @@ export type SilhouetteStickmanProps = {
   yaw?: number;
   layerGap?: number;
   nearArmBehindHead?: boolean;
+  /** Clothing variations (gown, veil, coif, hood, hat, apron). Walter's default: tunic, bare head. */
+  costume?: Costume;
+  /** Prop held in the near / far hand. */
+  prop?: PropId;
+  farProp?: PropId;
 };
 
+const NO_COSTUME: Costume = {};
 const LIMB = 0.046;
 const LEG = 0.054;
 
@@ -91,7 +100,7 @@ const Sleeve: React.FC<{ length: number; w0: number; w1: number }> = ({ length, 
   return <Fill pts={pts} material={m.cloth} z={0.002} />;
 };
 
-const Arm: React.FC<{ arm: ArmPose }> = ({ arm }) => (
+const Arm: React.FC<{ arm: ArmPose; prop?: PropId }> = ({ arm, prop }) => (
   <group rotation-z={deg(arm.shoulder)}>
     <Limb length={D.upperArm} width={LIMB} />
     <Sleeve length={D.upperArm + 0.02} w0={0.09} w1={0.075} />
@@ -100,6 +109,7 @@ const Arm: React.FC<{ arm: ArmPose }> = ({ arm }) => (
       <Sleeve length={D.forearm * 0.82} w0={0.075} w1={0.068} />
       <group position-y={-D.forearm} rotation-z={deg(arm.wrist)}>
         <Hand />
+        {prop ? <Prop id={prop} /> : null}
       </group>
     </group>
   </group>
@@ -143,11 +153,13 @@ const Tunic: React.FC<{ breath: number }> = ({ breath }) => {
 
 const HEAD_DISC = ellipsePts(0, 0, D.headRadius, D.headRadius, 56);
 
-const Head: React.FC<{ pose: StickmanPose; withFace: boolean }> = ({ pose, withFace }) => {
+const Head: React.FC<{ pose: StickmanPose; withFace: boolean; headwear: Costume["headwear"] }> = ({ pose, withFace, headwear = "none" }) => {
   const m = useSil();
   return (
     <group position={[0.01, D.headRadius, 0]}>
+      <HeadwearBack kind={headwear} />
       <Fill pts={HEAD_DISC} material={m.body} />
+      <HeadwearFront kind={headwear} />
       {withFace ? (
         <group position-z={0.002}>
           <SilhouetteFace face={pose.face} turn={pose.headTurn} />
@@ -158,12 +170,8 @@ const Head: React.FC<{ pose: StickmanPose; withFace: boolean }> = ({ pose, withF
 };
 
 /** The full figure (one pass). */
-const Figure: React.FC<{ pose: StickmanPose; layerGap: number; nearArmBehindHead: boolean; withFace: boolean }> = ({
-  pose,
-  layerGap,
-  nearArmBehindHead,
-  withFace,
-}) => {
+type FigureProps = { pose: StickmanPose; layerGap: number; nearArmBehindHead: boolean; withFace: boolean; costume: Costume; prop?: PropId; farProp?: PropId };
+const Figure: React.FC<FigureProps> = ({ pose, layerGap, nearArmBehindHead, withFace, costume, prop, farProp }) => {
   const m = useSil();
   const z = (layer: number) => layer * layerGap;
   return (
@@ -176,19 +184,19 @@ const Figure: React.FC<{ pose: StickmanPose; layerGap: number; nearArmBehindHead
       </group>
       <group rotation-z={deg(pose.torso)}>
         <group position={[0, D.shoulderY, z(2)]}>
-          <Arm arm={pose.armFar} />
+          <Arm arm={pose.armFar} prop={farProp} />
         </group>
         <group position-z={z(3)}>
-          <Tunic breath={pose.breath} />
+          {costume.gown ? <Gown breath={pose.breath} apron={costume.apron} /> : <Tunic breath={pose.breath} />}
         </group>
         <group position={[0, D.torsoLength - 0.01, z(4)]}>
           <Stroke pts={[[0, 0.0], [0, D.neck + 0.05]]} width={0.065} material={m.body} z={-0.008} />
           <group position-y={D.neck} rotation-z={deg(pose.head)}>
-            <Head pose={pose} withFace={withFace} />
+            <Head pose={pose} withFace={withFace} headwear={costume.headwear} />
           </group>
         </group>
         <group position={[0.01, D.shoulderY, nearArmBehindHead ? z(3.6) : z(6)]}>
-          <Arm arm={pose.armNear} />
+          <Arm arm={pose.armNear} prop={prop} />
         </group>
       </group>
     </group>
@@ -208,6 +216,9 @@ export const SilhouetteStickman: React.FC<SilhouetteStickmanProps> = ({
   yaw = 0,
   layerGap = 0.006,
   nearArmBehindHead = false,
+  costume = NO_COSTUME,
+  prop,
+  farProp,
 }) => {
   const mats = useMemo(
     () => ({
@@ -218,6 +229,7 @@ export const SilhouetteStickman: React.FC<SilhouetteStickmanProps> = ({
       rope: basic(palette.rope),
       feature: basic(palette.feature),
       pupil: basic(palette.body),
+      headwear: basic(palette.headwear ?? "#e6dccb"),
       rim: basic(palette.rim),
     }),
     [palette],
@@ -227,11 +239,12 @@ export const SilhouetteStickman: React.FC<SilhouetteStickmanProps> = ({
   for (const k of ["cloth", "clothDark", "clothPatch", "rope"] as const) {
     mats[k].color.set(palette[k]).multiply(t).multiplyScalar(light);
   }
+  mats.headwear.color.set(palette.headwear ?? "#e6dccb").multiply(t).multiplyScalar(light);
   mats.rim.color.set(palette.rim).multiplyScalar(rimStrength);
 
   const main: SilMaterials = mats;
   const rimMats: SilMaterials = useMemo(
-    () => ({ body: mats.rim, cloth: mats.rim, clothDark: mats.rim, clothPatch: mats.rim, rope: mats.rim, feature: mats.rim, pupil: mats.rim }),
+    () => ({ body: mats.rim, cloth: mats.rim, clothDark: mats.rim, clothPatch: mats.rim, rope: mats.rim, feature: mats.rim, pupil: mats.rim, headwear: mats.rim }),
     [mats],
   );
 
@@ -244,12 +257,12 @@ export const SilhouetteStickman: React.FC<SilhouetteStickmanProps> = ({
       {rimStrength > 0 ? (
         <SilContext.Provider value={rimMats}>
           <group position={rimOffset}>
-            <Figure pose={pose} layerGap={layerGap} nearArmBehindHead={nearArmBehindHead} withFace={false} />
+            <Figure pose={pose} layerGap={layerGap} nearArmBehindHead={nearArmBehindHead} withFace={false} costume={costume} prop={prop} farProp={farProp} />
           </group>
         </SilContext.Provider>
       ) : null}
       <SilContext.Provider value={main}>
-        <Figure pose={pose} layerGap={layerGap} nearArmBehindHead={nearArmBehindHead} withFace />
+        <Figure pose={pose} layerGap={layerGap} nearArmBehindHead={nearArmBehindHead} withFace costume={costume} prop={prop} farProp={farProp} />
       </SilContext.Provider>
     </group>
   );

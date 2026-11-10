@@ -4,12 +4,14 @@ import { RigPreview } from "./dev/RigPreview";
 import { StyleTest, STYLE_TEST_DURATION } from "./dev/StyleTest";
 import { Scene1 } from "./scenes/scene1/Scene1";
 import { SCENE1_DURATION, SCENE1_FPS } from "./scenes/scene1/timeline";
-import { Documentary, makeScenePreview } from "./film/Documentary";
-import { FILM_DURATION, FILM_FPS } from "./film/scenes";
+import { AnyScene, Documentary, makeScenePreview } from "./film/Documentary";
+import { FILM_DURATION, FILM_FPS, FILM_SCENES } from "./film/scenes";
 import { SCENE2_DURATION, SCENE2_FPS } from "./scenes/scene2/timeline";
 
 const Scene2Preview = makeScenePreview(2);
 const NARRATION_ON = { showNarration: true };
+/** The finished film: voice-over, no burned-in subtitles (set showNarration: true to add them). */
+const FILM_PROPS = { showNarration: false, withVoice: true };
 
 export const FPS = 30;
 
@@ -54,7 +56,20 @@ export const RemotionRoot: React.FC = () => {
           height={720}
           defaultProps={NARRATION_ON}
         />
-        {/* The film so far: every finished scene in order (src/film/scenes.ts) */}
+        {/* Any single scene, 1–56: set the "scene" prop (e.g. --props='{"scene":25}') */}
+        <Composition
+          id="Scene"
+          component={AnyScene}
+          durationInFrames={300}
+          fps={FILM_FPS}
+          width={1280}
+          height={720}
+          defaultProps={{ scene: 3, showNarration: true, withVoice: true }}
+          calculateMetadata={({ props }) => ({
+            durationInFrames: FILM_SCENES.find((s) => s.number === props.scene)?.durationInFrames ?? 300,
+          })}
+        />
+        {/* The whole film: all 56 scenes in order (src/film/scenes.ts) */}
         <Composition
           id="Documentary"
           component={Documentary}
@@ -62,7 +77,7 @@ export const RemotionRoot: React.FC = () => {
           fps={FILM_FPS}
           width={1920}
           height={1080}
-          defaultProps={NARRATION_ON}
+          defaultProps={FILM_PROPS}
         />
         <Composition
           id="Documentary-720p"
@@ -71,7 +86,7 @@ export const RemotionRoot: React.FC = () => {
           fps={FILM_FPS}
           width={1280}
           height={720}
-          defaultProps={NARRATION_ON}
+          defaultProps={FILM_PROPS}
         />
       </Folder>
       <Folder name="Dev">

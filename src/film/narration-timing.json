@@ -1,0 +1,394 @@
+{
+ "1": {
+  "title": "The Soil of 1320",
+  "text": "England, thirteen-twenty. You wake to smoke, straw and cold. You are not a knight, a monk or a merchant. You are a villein, and this is your day.",
+  "startSec": 1.5,
+  "audioSec": 11.088,
+  "frames": 450
+ },
+ "2": {
+  "title": "Three Promises",
+  "text": "Before this day ends, you'll reap another man's harvest, be summoned to his court, and see what happens to a neighbour who said no.",
+  "startSec": 0.35,
+  "audioSec": 8.112,
+  "frames": 360
+ },
+ "3": {
+  "title": "The Cold Half of the Bed",
+  "text": "The other half of the bed is already cold. Alice rose first.",
+  "startSec": 0.45,
+  "audioSec": 4.584,
+  "frames": 210
+ },
+ "4": {
+  "title": "Born Unfree",
+  "text": "On the lord's rolls you are Walter atte Brook, nativus: born unfree. Your land, your labour, even your daughters' marriages answer to one man.",
+  "startSec": 0.45,
+  "audioSec": 9.048,
+  "frames": 360
+ },
+ "5": {
+  "title": "Mud, Oak and Smoke",
+  "text": "Oak posts, hazel and mud: wattle and daub. No chimney. The smoke finds its own way out through the thatch.",
+  "startSec": 0.45,
+  "audioSec": 8.352,
+  "frames": 330
+ },
+ "6": {
+  "title": "Alice at the Hearth",
+  "text": "Alice is back from the well. She coaxes last night's embers into flame.",
+  "startSec": 0.45,
+  "audioSec": 4.896,
+  "frames": 210
+ },
+ "7": {
+  "title": "Four Children, Two Graves",
+  "text": "Four children survive. Joan, fifteen, and already eyeing a boy. Hugh, nine. Little Agnes. And the baby, who coughed half the night. Two more lie in the churchyard.",
+  "startSec": 0.45,
+  "audioSec": 14.76,
+  "frames": 478
+ },
+ "8": {
+  "title": "Bread, Ale and a Hood",
+  "text": "Breakfast is dark bread and weak ale; even the children drink it. You slept in your clothes. Add hose, shoes and a hood, and you're dressed.",
+  "startSec": 0.45,
+  "audioSec": 9.576,
+  "frames": 390
+ },
+ "9": {
+  "title": "The Knock",
+  "text": "A knock. Gilbert the reeve, a villein like you, chosen to drive his own neighbours. Boon day, he says. And your pig was in the lord's barley again.",
+  "startSec": 0.45,
+  "audioSec": 10.392,
+  "frames": 420
+ },
+ "10": {
+  "title": "The Village Wakes",
+  "text": "Thirty-odd houses along a muddy street. Each family has a toft, a croft, a pig, and at least one grudge.",
+  "startSec": 0.45,
+  "audioSec": 7.488,
+  "frames": 330
+ },
+ "11": {
+  "title": "No Clocks",
+  "text": "Nobody here owns a clock. Your day is measured by the sun, and by the church bell.",
+  "startSec": 0.45,
+  "audioSec": 5.52,
+  "frames": 270
+ },
+ "12": {
+  "title": "The Lord's Mill",
+  "text": "You must grind your grain at the lord's mill. The miller takes his toll in flour, and everyone suspects him of taking more.",
+  "startSec": 0.45,
+  "audioSec": 8.472,
+  "frames": 360
+ },
+ "13": {
+  "title": "The Quern Under the Straw",
+  "text": "Grinding at home on a hand-quern is forbidden. At St Albans, an abbot will pave his parlour with confiscated querns, and in 1381 rebels will rip them up.",
+  "startSec": 0.45,
+  "audioSec": 10.824,
+  "frames": 420
+ },
+ "14": {
+  "title": "The Lord's Pigeons",
+  "text": "Only the lord may keep doves. They eat your seed corn. You may not touch them.",
+  "startSec": 0.45,
+  "audioSec": 5.736,
+  "frames": 270
+ },
+ "15": {
+  "title": "Ten Men, One Rope",
+  "text": "Every man over twelve belongs to a tithing: about ten neighbours answerable for each other. If one of them runs, the others pay.",
+  "startSec": 0.45,
+  "audioSec": 7.872,
+  "frames": 360
+ },
+ "16": {
+  "title": "The Lord You Never See",
+  "text": "Sir Roger owns this manor. You may never speak a word to him. You will feel him every hour of your life.",
+  "startSec": 0.45,
+  "audioSec": 7.08,
+  "frames": 330
+ },
+ "17": {
+  "title": "Joan at the Well",
+  "text": "At the well, Joan and the miller's boy are not talking to each other. Very noticeably.",
+  "startSec": 0.45,
+  "audioSec": 5.64,
+  "frames": 270
+ },
+ "18": {
+  "title": "The Open Fields",
+  "text": "Your land isn't a farm. It's about thirty narrow strips scattered across great unfenced fields, so that good soil and bad are shared out among everyone.",
+  "startSec": 0.45,
+  "audioSec": 9.864,
+  "frames": 390
+ },
+ "19": {
+  "title": "Ridge and Furrow",
+  "text": "Year after year, the plough heaps each strip into a ridge, with a furrow between. Remember these shapes.",
+  "startSec": 0.45,
+  "audioSec": 6.384,
+  "frames": 300
+ },
+ "20": {
+  "title": "The Hayward's Horn",
+  "text": "A horn. The hayward is calling the village to the lord's corn.",
+  "startSec": 0.45,
+  "audioSec": 4.2,
+  "frames": 210
+ },
+ "21": {
+  "title": "Boon Day",
+  "text": "A boon day. Every soul in your house except your wife must reap the lord's field first. Your own wheat will have to wait.",
+  "startSec": 0.45,
+  "audioSec": 9.216,
+  "frames": 360
+ },
+ "22": {
+  "title": "The Rhythm of the Sickle",
+  "text": "Grab a fistful. Cut. Lay it down. Step. Again. And again. Until the sun moves.",
+  "startSec": 0.45,
+  "audioSec": 8.808,
+  "frames": 299
+ },
+ "23": {
+  "title": "Small Hands",
+  "text": "Joan binds the sheaves. Hugh chases crows and hauls water. At nine, he is already a labourer.",
+  "startSec": 0.45,
+  "audioSec": 7.008,
+  "frames": 270
+ },
+ "24": {
+  "title": "The Tenth Sheaf",
+  "text": "Every tenth sheaf is marked and left standing. That one belongs to the Church.",
+  "startSec": 0.45,
+  "audioSec": 5.808,
+  "frames": 240
+ },
+ "25": {
+  "title": "The Hungry Years",
+  "text": "You've seen this field fail. Five years ago it rained all summer. Seed rotted, prices soared, and people ate their seed corn, then their horses. Perhaps one in ten died. That winter you buried a child.",
+  "startSec": 0.45,
+  "audioSec": 14.688,
+  "frames": 540
+ },
+ "26": {
+  "title": "The Empty Stall",
+  "text": "And now a plague on the cattle. Since last year, oxen have been dying across England. Your plough team is two beasts short, and the lord's ploughing comes first.",
+  "startSec": 0.45,
+  "audioSec": 10.68,
+  "frames": 450
+ },
+ "27": {
+  "title": "The Dry Boon",
+  "text": "At noon the lord feeds his reapers: bread, cheese, perhaps herring. On a wet boon there's ale. Today is a dry boon.",
+  "startSec": 0.45,
+  "audioSec": 7.704,
+  "frames": 330
+ },
+ "28": {
+  "title": "Blood on the Stubble",
+  "text": "A sickle slips. There's no doctor: only linen, prayer and luck. The coroners' rolls are full of harvest accidents.",
+  "startSec": 0.45,
+  "audioSec": 9.36,
+  "frames": 316
+ },
+ "29": {
+  "title": "The Cloud",
+  "text": "By mid-afternoon, a dark line of cloud in the west. Your own wheat stands ripe on the far side of the field.",
+  "startSec": 0.45,
+  "audioSec": 6.816,
+  "frames": 330
+ },
+ "30": {
+  "title": "The Ale-Stake",
+  "text": "A bush on a pole means Matilda has brewed. Ale sours in days, so women brew constantly, and the ale-tasters fine anything thin or overpriced.",
+  "startSec": 0.45,
+  "audioSec": 10.848,
+  "frames": 390
+ },
+ "31": {
+  "title": "Judgement on the Wall",
+  "text": "In church, the wall shows devils dragging sinners into a monster's mouth. You can't read. You don't need to.",
+  "startSec": 0.45,
+  "audioSec": 7.44,
+  "frames": 300
+ },
+ "32": {
+  "title": "\"Sir\" William",
+  "text": "Your priest is Sir William. He takes a tenth of your grain, your lambs, even your eggs.",
+  "startSec": 0.45,
+  "audioSec": 5.208,
+  "frames": 270
+ },
+ "33": {
+  "title": "The Price of a Wedding",
+  "text": "Joan wants the miller's boy. First you must pay the lord merchet: a fine for permission to marry. Some lords even fined unwed mothers.",
+  "startSec": 0.45,
+  "audioSec": 9.456,
+  "frames": 360
+ },
+ "34": {
+  "title": "The Hare",
+  "text": "A hare bolts from the stubble. Catch it, and you'll be fined. Game belongs to the lord.",
+  "startSec": 0.45,
+  "audioSec": 6.192,
+  "frames": 270
+ },
+ "35": {
+  "title": "The King's Reach",
+  "text": "Even the king reaches this far. His tax men value your pots and animals. His purveyors take grain for his wars and pay late, or never.",
+  "startSec": 0.45,
+  "audioSec": 9.096,
+  "frames": 390
+ },
+ "36": {
+  "title": "News from the North",
+  "text": "A pedlar brings news: Scots burning the north, the king feuding with his barons. It all feels very far away.",
+  "startSec": 0.45,
+  "audioSec": 7.656,
+  "frames": 330
+ },
+ "37": {
+  "title": "The Danger in the Ditch",
+  "text": "The real dangers are ordinary: open wells, ditches, cooking fires, carts. Coroners recorded toddlers drowning while their parents worked the harvest.",
+  "startSec": 0.45,
+  "audioSec": 8.736,
+  "frames": 330
+ },
+ "38": {
+  "title": "A Seal of Your Own",
+  "text": "Yet you are not powerless. You own a seal. Peasants buy, sell and lease land, and the court records every deal.",
+  "startSec": 0.45,
+  "audioSec": 7.704,
+  "frames": 330
+ },
+ "39": {
+  "title": "John Cok's Empty Byre",
+  "text": "On the way home you pass John Cok's house. His byre is empty. His cow is gone. And John won't meet your eye.",
+  "startSec": 0.45,
+  "audioSec": 8.088,
+  "frames": 360
+ },
+ "40": {
+  "title": "The Day John Said No",
+  "text": "Three weeks ago, on a boon day, John reaped his own corn instead of the lord's. A small act of defiance. This is what it cost.",
+  "startSec": 0.45,
+  "audioSec": 9.072,
+  "frames": 390
+ },
+ "41": {
+  "title": "Distraint",
+  "text": "The court fined him. He couldn't pay. So the lord's men took his cow, and they'll keep it until he does.",
+  "startSec": 0.45,
+  "audioSec": 8.76,
+  "frames": 330
+ },
+ "42": {
+  "title": "Tomorrow's Court",
+  "text": "Tomorrow, your turn. The court meets in the lord's hall, and your own neighbours sit as jurors. The pig will cost you pence you don't have.",
+  "startSec": 0.45,
+  "audioSec": 9.024,
+  "frames": 390
+ },
+ "43": {
+  "title": "If You Fall Ill",
+  "text": "If you fall sick, the work is still owed: you send a son, hire a man, or pay. And when you die, the lord takes your best beast, and the priest your second best.",
+  "startSec": 0.45,
+  "audioSec": 9.096,
+  "frames": 510
+ },
+ "44": {
+  "title": "If You Run",
+  "text": "You could run. Some do. The court names you and orders your family to bring you back. Survive a year and a day in a chartered town, and you might be free.",
+  "startSec": 0.45,
+  "audioSec": 9.84,
+  "frames": 480
+ },
+ "45": {
+  "title": "Those Who Fought Back",
+  "text": "And some villages fought back. They searched the Domesday Book for proof their ancestors were free, refused services together, and took their lords to the king's courts. They usually lost. But not always.",
+  "startSec": 0.45,
+  "audioSec": 14.928,
+  "frames": 483
+ },
+ "46": {
+  "title": "Half Still Standing",
+  "text": "Released at last, you run to your own strip and reap until you can't see your hands. Half of it is still standing.",
+  "startSec": 0.45,
+  "audioSec": 7.152,
+  "frames": 360
+ },
+ "47": {
+  "title": "The Widow Next Door",
+  "text": "Next door, Emma lost her husband last winter. She kept his land. But the steward keeps asking when she'll remarry.",
+  "startSec": 0.45,
+  "audioSec": 8.448,
+  "frames": 330
+ },
+ "48": {
+  "title": "Hot to the Touch",
+  "text": "Home. The baby is hot to the touch. No physician comes to a villein's cottage. Alice tries a herb, a charm, a saint's name.",
+  "startSec": 0.45,
+  "audioSec": 10.224,
+  "frames": 360
+ },
+ "49": {
+  "title": "The Lord's Dung",
+  "text": "Before dark, Hugh pens your sheep on the lord's land. Their dung manures his fields, not yours.",
+  "startSec": 0.45,
+  "audioSec": 6.048,
+  "frames": 270
+ },
+ "50": {
+  "title": "Pottage",
+  "text": "Supper is pottage: peas, beans, leeks and oats, stewed for hours. Bacon, if you're lucky. No potatoes. No tomatoes. Not for centuries.",
+  "startSec": 0.45,
+  "audioSec": 12.408,
+  "frames": 407
+ },
+ "51": {
+  "title": "Spinning by Firelight",
+  "text": "Alice spins wool by firelight, one eye on the cradle. Her hands haven't stopped since before dawn.",
+  "startSec": 0.45,
+  "audioSec": 6.84,
+  "frames": 270
+ },
+ "52": {
+  "title": "Words You Can't Translate",
+  "text": "You kneel and pray in Latin, Pater Noster, Ave Maria: words you can't fully translate, for a child you can't heal.",
+  "startSec": 0.45,
+  "audioSec": 7.248,
+  "frames": 330
+ },
+ "53": {
+  "title": "Rain on the Thatch",
+  "text": "Then, rain on the thatch. Your wheat is still in the field. There is nothing you can do until dawn.",
+  "startSec": 0.45,
+  "audioSec": 6.6,
+  "frames": 330
+ },
+ "54": {
+  "title": "The Fever Breaks",
+  "text": "Alice banks the fire under ash. The baby's breathing slows, and settles. The fever has broken. For tonight.",
+  "startSec": 0.45,
+  "audioSec": 9.648,
+  "frames": 324
+ },
+ "55": {
+  "title": "Twenty-Eight Years",
+  "text": "Twenty-eight years from tonight, a plague will kill perhaps half of England. Labour will become precious, and men like you will start to say no. Serfdom will die slowly. But it will die.",
+  "startSec": 0.45,
+  "audioSec": 11.088,
+  "frames": 480
+ },
+ "56": {
+  "title": "The Furrow Remembers",
+  "text": "You'll leave no portrait, no letter, perhaps one line in a court roll. But walk across an English field today, and look closely. The ridges and furrows you ploughed are still there.",
+  "startSec": 0.45,
+  "audioSec": 13.488,
+  "frames": 630
+ }
+}

@@ -26,6 +26,27 @@ On an older Windows PC: render the 720p version first. If the 3D layer is black 
 the render fails with a WebGL error, add `-- --gl=swangle` (software rendering: slow but always works),
 e.g. `npm run render:scene1:720p -- --gl=swangle`. With a decent GPU, add `-- --concurrency=2` to speed up.
 
+### The full film (all 56 scenes, 11 minutes, with audio)
+**Dust-of-the-Furrow → Documentary** (1080p) / **Documentary-720p**. Single scenes: the **Scene**
+composition with props `{"scene": 25}`.
+
+```bash
+scripts/render-film.sh Documentary-720p 6      # renders in 6 resumable chunks, joins them → out/Documentary-720p.mp4
+scripts/render-film.sh Documentary 6 --gl=angle --concurrency=4   # 1080p on a PC with a GPU
+```
+
+How it is built:
+- `scripts/build-audio.py` speaks every narration from `docs/storyboard.md` with the Piper neural voice
+  (`en_GB-northern_english_male-medium`), normalises it, and writes `public/audio/narration/sNN.mp3`;
+  it synthesises the music bed and ambience (`public/audio/music`, `public/audio/sfx`), and writes each scene's
+  real length to `src/film/narration-timing.json`. Re-run it after editing narration.
+- Scenes 3–56 are **data** (`src/film/specs/*.ts`): set, time of day, cast, actions, expressions, props, shots,
+  graphics and sound for each scene. `src/film/generic/` turns them into pictures: cast (`cast.ts`),
+  actions (`actions.ts`), expressions, automatic multi-shot camera, graphics (`overlays.tsx`), animals and dressing.
+- Sets: cottage (`environments/cottage`), village, fields, road, modern pasture (`environments/outdoor`),
+  church, manor-court hall, ox-house and a graphic stage (`environments/interiors`).
+- Full film defaults: voice-over on, subtitles off (`--props='{"showNarration":true}'` to burn them in).
+
 ### Scene 2 — "Three Promises" (12 s)
 Walter sits on the foot of the bed. As the narrator promises the day ahead ("you'll reap another
 man's harvest, be summoned to his court, and see what happens to a neighbour who said no"), three

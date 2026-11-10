@@ -10,6 +10,8 @@ export type SilMaterials = {
   rope: THREE.MeshBasicMaterial;
   feature: THREE.MeshBasicMaterial;
   pupil: THREE.MeshBasicMaterial;
+  /** Veils, coifs, aprons, swaddling: undyed linen. */
+  headwear: THREE.MeshBasicMaterial;
 };
 
 export const SilContext = createContext<SilMaterials | null>(null);
