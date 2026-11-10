@@ -3,7 +3,7 @@
  *
  *   0–20     fade up from black
  *   0–80     establishing view of the dim cottage
- *   60–320   slow push-in towards the bed
+ *   (camera: four shots, see SCENE1_SHOTS)
  *   70–220   morning light grows through the window
  *   150–200  eyes flutter open
  *   200–240  raises his head
@@ -12,8 +12,8 @@
  *   355–415  looks around the room, tired and confused
  *   410–450  scratches his head
  */
-import type { Vec3 } from "../../engine/CameraRig";
-import { animate, buildTrack, ease, lerp as mix, progress, softNoise } from "../../engine/animation";
+import { animate, buildTrack, ease, lerp as mix, progress } from "../../engine/animation";
+import type { Shot } from "../../engine/shots";
 import {
   blink,
   LYING_ON_BACK,
@@ -27,30 +27,19 @@ import {
 export const SCENE1_FPS = 30;
 export const SCENE1_DURATION = 450;
 
-// ---- camera -----------------------------------------------------------------------
-
-type Cam = { position: Vec3; target: Vec3 };
-
-const CAMERA = buildTrack<Cam>({ position: [1.95, 1.72, 1.8], target: [-0.9, 0.92, -1.3] }, [
-  { frame: 0 },
-  { frame: 70, set: { position: [1.8, 1.69, 1.66], target: [-1.0, 0.9, -1.33] }, ease: ease.linear },
-  { frame: 320, set: { position: [-0.82, 1.22, 0.05], target: [-1.62, 0.86, -1.6] }, ease: ease.camera },
-  { frame: 450, set: { position: [-0.95, 1.2, -0.12], target: [-1.66, 0.98, -1.62] }, ease: ease.inOut },
-]);
-
-export const cameraAt = (frame: number): Cam => {
-  const c = animate(frame, CAMERA);
-  // barely-there handheld breathing, deterministic
-  const sway = 0.006;
-  return {
-    position: [
-      c.position[0] + softNoise(frame, 1) * sway,
-      c.position[1] + softNoise(frame, 2) * sway * 0.7,
-      c.position[2] + softNoise(frame, 3) * sway,
-    ],
-    target: c.target,
-  };
-};
+// ---- shots (house style: several cuts per scene) -----------------------------------
+/**
+ *   1 · 0–150    wide: the dim cottage, title, morning light starting
+ *   2 · 150–245  close-up: his eyes open, he lifts his head
+ *   3 · 245–355  medium: he sits up into the sunbeam and yawns
+ *   4 · 355–450  closer: he looks around, scratches his head
+ */
+export const SCENE1_SHOTS: Shot[] = [
+  { start: 0, from: [1.75, 1.66, 1.6], to: [1.15, 1.48, 1.05], target: [-1.25, 0.82, -1.4], targetTo: [-1.45, 0.8, -1.45], fov: 42, bokeh: 1.5, range: 2.2, ease: ease.camera },
+  { start: 150, from: [-1.7, 1.2, -0.5], to: [-1.78, 1.14, -0.66], target: [-2.12, 0.62, -1.42], fov: 34, bokeh: 6, range: 0.4 },
+  { start: 245, from: [-0.95, 1.02, 0.42], to: [-1.0, 1.08, 0.22], target: [-1.6, 0.95, -1.55], fov: 40, bokeh: 4, range: 0.8 },
+  { start: 355, from: [-0.9, 1.24, 0.22], to: [-0.95, 1.26, 0.02], target: [-1.48, 1.18, -1.55], fov: 40, bokeh: 4.5, range: 0.55 },
+];
 
 // ---- light -------------------------------------------------------------------------
 
@@ -149,7 +138,7 @@ export const characterPoseAt = (frame: number): StickmanPose => {
   if (scratch > 0) {
     const [hx, hy] = headCenter(body);
     const wiggle = frame > 426 ? Math.sin(frame * 0.9) * 0.018 : 0;
-    body.armNear = reachArm(body.torso, body.armNear, [hx - 0.1 + wiggle, hy + 0.17 + wiggle * 0.4], scratch, 200 + wiggle * 500, -1);
+    body.armNear = reachArm(body.torso, body.armNear, [hx - 0.16 + wiggle, hy + 0.13 + wiggle * 0.4], scratch, 200 + wiggle * 500, -1);
     body.headTurn = mix(body.headTurn, body.headTurn - 0.1, scratch);
     body.head += scratch * 4;
   }

@@ -3,24 +3,29 @@
  * "Before this day ends, you'll reap another man's harvest, be summoned to his
  * court, and see what happens to a neighbour who said no."
  *
- * Same cottage set and the same <Stickman> rig as Scene 1 (no changes to either).
+ * House style (docs/style-guide.md): silhouette Walter, stylised cottage,
+ * four shots cut on the promises, depth of field, letterbox.
  */
 import { Audio } from "@remotion/media";
 import { ThreeCanvas } from "@remotion/three";
 import { AbsoluteFill, Sequence, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 import * as THREE from "three";
-import { Stickman } from "../../characters/stickman";
-import { clamp, lerp } from "../../engine/animation";
+import { SilhouetteStickman } from "../../characters/stickman";
+import { lerp } from "../../engine/animation";
 import { CameraRig } from "../../engine/CameraRig";
+import { faceCameraYaw, headWorld, shotAt } from "../../engine/shots";
 import { Cottage } from "../../environments/cottage/Cottage";
+import { CinematicFX } from "../../style/CinematicFX";
+import { FilmGrain, Letterbox, Vignette } from "../../style/Frame";
 import { CourtCard, DistraintCard, HarvestCard } from "./PromiseCards";
 import {
   BLACK_FROM,
   CARD_CUES,
   EMBER,
+  SCENE2_DURATION,
+  SCENE2_SHOTS,
   SEAT,
   SUN,
-  cameraAt,
   cardInAt,
   cardSettleAt,
   characterLightAt,
@@ -30,24 +35,26 @@ import {
 
 const World: React.FC = () => {
   const frame = useCurrentFrame();
-  const cam = cameraAt(frame);
-  // keep the flat character's plane turned partly towards the camera (as in Scene 1)
-  const toCam = Math.atan2(cam.position[0] - SEAT.x, cam.position[2] - SEAT.z);
-  const yaw = clamp(toCam * 0.55, -0.35, 0.35);
-  const fogColor = new THREE.Color().setRGB(0.05 + 0.05 * SUN, 0.045 + 0.04 * SUN, 0.04 + 0.03 * SUN);
+  const shot = shotAt(SCENE2_SHOTS, frame, SCENE2_DURATION);
+  const pose = characterPoseAt(frame);
+  const yaw = faceCameraYaw(shot.position, SEAT);
+  const fog = new THREE.Color("#1d1628");
   return (
     <>
-      <CameraRig position={cam.position} target={cam.target} fov={40} />
-      <color attach="background" args={[fogColor]} />
-      <fogExp2 attach="fog" args={[fogColor, 0.075]} />
-      <Cottage frame={frame + 450} sun={SUN} ember={EMBER} />
-      <Stickman
-        pose={characterPoseAt(frame)}
+      <CameraRig position={shot.position} target={shot.target} fov={shot.fov} />
+      <color attach="background" args={[fog]} />
+      <fogExp2 attach="fog" args={[fog, 0.06]} />
+      <Cottage frame={frame + 450} sun={SUN} ember={EMBER} look="stylized" />
+      <SilhouetteStickman
+        pose={pose}
         position={[SEAT.x, SEAT.y, SEAT.z]}
         yaw={yaw}
         light={characterLightAt(frame)}
-        tint="#ffeedd"
+        tint="#ffe2c8"
+        rimAngle={140}
+        rimStrength={1.35}
       />
+      <CinematicFX focus={headWorld(pose, SEAT, yaw)} focusRange={shot.range} bokeh={shot.bokeh} bloom={0.8} />
     </>
   );
 };
@@ -114,17 +121,16 @@ export const Scene2: React.FC = () => {
         height={height}
         shadows="soft"
         dpr={1}
-        gl={{ antialias: true, powerPreference: "high-performance" }}
-        camera={{ fov: 40, near: 0.05, far: 30, position: [-1.15, 1.05, 0.85] }}
+        gl={{ antialias: false, powerPreference: "high-performance" }}
+        camera={{ fov: 40, near: 0.05, far: 30, position: SCENE2_SHOTS[0].from }}
       >
         <World />
       </ThreeCanvas>
 
       {/* the set dims as the promises get heavier; the cards stay bright above it */}
       <AbsoluteFill style={{ backgroundColor: "#000", opacity: setDimAt(frame) }} />
-      <AbsoluteFill
-        style={{ background: "radial-gradient(ellipse at 35% 50%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.6) 100%)" }}
-      />
+      <Vignette strength={0.55} centerX={38} />
+      <FilmGrain opacity={0.08} />
       <PromiseCardsOverlay />
 
       {/* three low drum hits, one per card */}
@@ -136,6 +142,7 @@ export const Scene2: React.FC = () => {
 
       {/* cut to black for the final half second */}
       {frame >= BLACK_FROM ? <AbsoluteFill style={{ backgroundColor: "#000", zIndex: 100 }} /> : null}
+      <Letterbox />
     </AbsoluteFill>
   );
 };

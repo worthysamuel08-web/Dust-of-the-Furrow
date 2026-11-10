@@ -16,8 +16,8 @@ import {
   type FacePose,
   type StickmanPose,
 } from "../../characters/stickman";
-import type { Vec3 } from "../../engine/CameraRig";
-import { animate, buildTrack, ease, lerp, progress, softNoise } from "../../engine/animation";
+import { animate, buildTrack, ease, progress } from "../../engine/animation";
+import type { Shot } from "../../engine/shots";
 import { NARRATION, narrationEndFrame, wordFrame } from "../../film/narration";
 
 export const SCENE2_FPS = 30;
@@ -38,17 +38,18 @@ export const BLACK_FROM = SCENE2_DURATION - 15;
 /** Pelvis on the foot end of the bed; legs hang over the footboard. */
 export const SEAT = { x: -0.9, y: 0.66, z: -1.5 } as const;
 
-// ---- camera: locked medium shot with a small punch-in per card -------------------
-const CAM_POS: Vec3 = [-1.15, 1.05, 0.85];
-const CAM_TARGET: Vec3 = [-0.42, 0.92, -1.5];
-
-export const cameraAt = (frame: number): { position: Vec3; target: Vec3 } => {
-  // each card pushes the camera ~5% of the way to the target, quickly then settling
-  const punch = CARD_CUES.reduce((acc, cue) => acc + 0.05 * progress(frame, cue, cue + 14, ease.out), 0);
-  const sway = 0.004;
-  const position = CAM_POS.map((p, i) => lerp(p, CAM_TARGET[i], punch) + softNoise(frame, i + 1) * sway) as Vec3;
-  return { position, target: CAM_TARGET };
-};
+// ---- shots: a hard cut lands with each promise ------------------------------------
+const [CUE1, CUE2, CUE3] = CARD_CUES;
+export const SCENE2_SHOTS: Shot[] = [
+  // medium-wide: Walter in the left third, room on the right for the cards
+  { start: 0, from: [-1.2, 1.05, 0.78], to: [-1.16, 1.05, 0.6], target: [-0.42, 0.95, -1.5], fov: 40, bokeh: 3.5, range: 0.8 },
+  // "another man's harvest": closer three-quarter shot
+  { start: CUE1, from: [-1.1, 1.16, 0.32], to: [-1.07, 1.16, 0.18], target: [-0.38, 1.08, -1.5], fov: 38, bokeh: 4.5, range: 0.6 },
+  // "summoned to his court": close-up on the worry
+  { start: CUE2, from: [-1.0, 1.3, -0.3], to: [-1.0, 1.29, -0.42], target: [-0.58, 1.24, -1.5], fov: 34, bokeh: 6.5, range: 0.38 },
+  // "a neighbour who said no": medium close, slow push to the knitted brow
+  { start: CUE3, from: [-1.08, 1.2, 0.1], to: [-1.02, 1.2, -0.2], target: [-0.42, 1.06, -1.5], fov: 38, bokeh: 5.5, range: 0.45 },
+];
 
 /** Darkens the 3D set as the promises get heavier ("dim dawn"), keeping focus on the cards. */
 export const setDimAt = (frame: number) =>

@@ -2,6 +2,8 @@
 
 ## The Dust of the Furrow — Scene 1: "The Soil of 1320"
 
+**House style:** black-silhouette characters, stylised sets, depth of field, letterbox, multi-shot editing. See `docs/style-guide.md`; the test bench is **Dev → StyleTest-Silhouette**.
+
 A villein wakes at dawn in his cottage (English manor, c. 1320). 15 s, 30 fps.
 2D cartoon stickman composited into a stylised 3D interior.
 
@@ -60,7 +62,9 @@ The full 56-scene storyboard is in `docs/storyboard.md` (validate with `python3 
 | `src/scenes/scene2/` | Scene 2: `timeline.ts` (cues from narration, poses, camera), `Scene2.tsx`, `PromiseCards.tsx` (SVG cards) |
 | `src/film/` | `scenes.ts` (running order), `Documentary.tsx` (whole film), `narration.ts` (script + timing), `NarrationSubtitles.tsx` |
 | `public/sfx/drum-hit.wav` | Synthesised drum hit used in Scene 2 |
-| `src/characters/stickman/` | Reusable 2D character: `Stickman.tsx` (rig/body), `Face.tsx`, `rig.ts` (pose type, presets, IK, blink), `shapes2d.tsx` (flat drawing primitives) |
+| `src/characters/stickman/` | Reusable 2D character: `silhouette/` (**house look**: `SilhouetteStickman`, white-on-black face, rim light), `rig.ts` (pose type, presets, IK, blink), `shapes2d.tsx` (flat drawing primitives); `Stickman.tsx`/`Face.tsx` = the original ink look |
+| `src/style/` | House-style finishing: `CinematicFX.tsx` (depth of field + bloom), `Frame.tsx` (letterbox, vignette, grain, glow titles) |
+| `src/engine/shots.ts` | Multi-shot camera lists, face-the-camera yaw, head position for focus |
 | `src/environments/cottage/` | Reusable cottage set: `layout.ts` (dimensions), `Structure.tsx` (frame, walls, roof, cruck), `Furnishings.tsx`, `Lighting.tsx`, `materials.ts` |
 | `src/engine/` | Shared: deterministic keyframing/easing (`animation.ts`), `CameraRig.tsx`, seeded procedural textures (`textures.ts`) |
 | `src/dev/RigPreview.tsx` | Character test bench |
@@ -85,7 +89,9 @@ Controls: `rootX/rootY/rootRot`, `torso`, `head`, `headTurn` (-1..1 fake 3/4 tur
 
 ### Performance choices (older GPUs)
 Lambert materials only, one shadow-casting light (1024² map), the light beam and dust are additive
-fakes (no volumetrics or post-processing), small seeded canvas textures, `dpr=1`, low-poly geometry.
+fakes (no volumetrics), `dpr=1`, low-poly geometry. The house style adds two post-processing passes
+(depth of field + bloom), which roughly doubles render time; for fast previews use the `-720p`
+compositions.
 
 ---
 

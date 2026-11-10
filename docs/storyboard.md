@@ -77,13 +77,13 @@ Each scene's duration comes from its narration: the time needed to speak the lin
 
 ## 3. Continuity bible
 
-### Walter (you): locked design from Scene 1
-- `<Stickman>` with `PEASANT_PALETTE`, `DIMENSIONS` unchanged: large clean white round head, black line limbs, white mitten hands and feet, muted brown tunic with a sewn patch and a rope belt, light stubble.
+### Walter (you): house-style silhouette (see `docs/style-guide.md`)
+- `<SilhouetteStickman>` with `WALTER_SILHOUETTE`, `DIMENSIONS` unchanged: solid black round head and thick black limbs, white eyes, eyebrows and mouth, black mitten hands and feet, a flat muted-brown tunic with long sleeves, a sewn patch and a rope belt, and a warm amber rim light. (Scenes 1–2 were first built with the ink-style `<Stickman>`; the director switched the film to this look after those were made, and both were rebuilt.)
 - His default `headTurn` faces 3/4 right. His expression baseline is tired: heavy lids (`eyeOpen` ≈ 0.6) and slightly worried brows (`browTilt` ≈ 0.3).
 - **Added as props or overlays, never by changing his rig:** hose and turnshoes (from Scene 8), a hood (from Scene 8), a sickle prop (Scenes 20–47), a seal on a cord (38).
-- He keeps the same `light`/`tint` approach in every set, so he always reads brighter than the environment.
+- His clothing follows the set's light (`light`/`tint`); his rim light (`rimAngle`, `rimStrength`) follows the key light in each shot.
 
-### Supporting cast: same rig and line style, distinguished only by costume, palette and scale
+### Supporting cast: same silhouette rig, distinguished only by costume, palette and scale
 | Character | Scale | Costume / palette | First seen |
 |---|---|---|---|
 | **Alice**, wife (fictional) | 0.95 | long kirtle (dull blue-grey), white linen veil and wimple | 6 |
