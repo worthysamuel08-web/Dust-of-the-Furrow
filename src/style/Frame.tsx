@@ -61,7 +61,8 @@ export const GlowTitle: React.FC<{
   const frame = useCurrentFrame();
   const { height } = useVideoConfig();
   if (frame < from || frame > to) return null;
-  const opacity = interpolate(frame, [from, from + 8, to - 8, to], [0, 1, 1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const ramp = Math.max(0.5, Math.min(8, (to - from) / 3));
+  const opacity = interpolate(frame, [from, from + ramp, to - ramp, to], [0, 1, 1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
   const scale = interpolate(frame, [from, from + 10], [1.12, 1], { extrapolateRight: "clamp" });
   return (
     <AbsoluteFill style={{ alignItems: "center", pointerEvents: "none" }}>

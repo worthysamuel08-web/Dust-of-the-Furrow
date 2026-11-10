@@ -13,7 +13,9 @@ const useFade = (from: number, to: number) => {
   const { fps } = useVideoConfig();
   const a = from * fps;
   const b = to * fps;
-  const o = interpolate(frame, [a, a + 8, b - 8, b], [0, 1, 1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  // fades shorten for very brief graphics so the ranges always stay increasing
+  const ramp = Math.max(0.5, Math.min(8, (b - a) / 3));
+  const o = b > a ? interpolate(frame, [a, a + ramp, b - ramp, b], [0, 1, 1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }) : 0;
   return { o, t: frame - a, visible: frame >= a && frame <= b };
 };
 

@@ -165,8 +165,8 @@ export const SECTION_1_2: SceneSpec[] = [
     shots: [{ type: "medium", at: 0 }, { type: "close", at: 0.45 }],
     grade: "none",
     overlays: [
-      { kind: "label", text: "HAND-MILLS: FORBIDDEN", where: "top", from: 0.5, to: sec(13, "At") - 0.1 },
-      { kind: "year", text: "ST ALBANS · c.1331", from: sec(13, "At"), to: dur(13) - 0.3 },
+      { kind: "label", text: "HAND-MILLS: FORBIDDEN", where: "top", from: 0.5, to: sec(13, "At", 2) - 0.1 },
+      { kind: "year", text: "ST ALBANS · c.1331", from: sec(13, "At", 2), to: dur(13) - 0.3 },
       { kind: "label", text: "QUERNS PAVE THE ABBOT'S FLOOR", from: sec(13, "abbot"), to: sec(13, "rebels") },
       { kind: "label", text: "1381: REBELS RIP THEM UP", from: sec(13, "rebels"), to: dur(13) - 0.3 },
     ],
