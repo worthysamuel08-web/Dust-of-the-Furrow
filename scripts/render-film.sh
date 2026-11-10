@@ -15,7 +15,7 @@ CHUNKS="${2:-6}"
 shift 2 || true
 EXTRA=("$@")
 
-TOTAL=$(npx remotion compositions --log=error 2>/dev/null | awk -v c="$COMP" '$1==c {print $4}')
+TOTAL=$(npx remotion compositions "${EXTRA[@]}" 2>/dev/null | awk -v c="$COMP" '$1==c {print $4}')
 if [ -z "${TOTAL}" ]; then
   echo "Could not find composition ${COMP}" >&2
   exit 1
