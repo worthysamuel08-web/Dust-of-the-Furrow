@@ -15,8 +15,43 @@ import {
  * PBR (MeshStandardMaterial) on older integrated GPUs and looks right for a
  * stylised, matte, smoky interior.
  */
-export const useCottageMaterials = () =>
+export type CottageLook = "textured" | "stylized";
+
+/**
+ * Stylised look (matches the silhouette characters): no surface textures, just
+ * flat colours shaded softly by the lights — clean shapes, mood from lighting.
+ * Same keys as the textured set, so every mesh works with either.
+ */
+const stylizedMaterials = () => {
+  const lambert = (color: string, side: THREE.Side = THREE.DoubleSide) => new THREE.MeshLambertMaterial({ color, side });
+  return {
+    daub: lambert("#c7b29c"),
+    earth: lambert("#6a5650", THREE.FrontSide),
+    thatch: lambert("#5c4836"),
+    timber: lambert("#3e2f2c"),
+    timberMid: lambert("#5a4238"),
+    plank: lambert("#6e5244"),
+    tick: lambert("#b49b80"),
+    wool: lambert("#7c6672"),
+    stone: lambert("#6b6470"),
+    stoneDark: lambert("#4c4652"),
+    ash: lambert("#3a3436"),
+    charcoal: lambert("#1a1517"),
+    iron: lambert("#2a2629"),
+    clay: lambert("#a65a3a"),
+    clayDark: lambert("#6e3c2a"),
+    bread: lambert("#9a6233"),
+    cloak: lambert("#3f4a4a"),
+    herbs: lambert("#58663e"),
+    onion: lambert("#a87444"),
+    wicker: lambert("#a8875e"),
+    rope: lambert("#6d5a3c"),
+  };
+};
+
+export const useCottageMaterials = (look: CottageLook = "textured") =>
   useMemo(() => {
+    if (look === "stylized") return stylizedMaterials();
     const lambert = (p: THREE.MeshLambertMaterialParameters) =>
       new THREE.MeshLambertMaterial({ side: THREE.DoubleSide, ...p });
 
@@ -56,6 +91,6 @@ export const useCottageMaterials = () =>
       wicker: lambert({ map: thatchTexture(31), color: "#e2c9a0" }),
       rope: lambert({ color: "#6d5a3c" }),
     };
-  }, []);
+  }, [look]);
 
 export type CottageMaterials = ReturnType<typeof useCottageMaterials>;

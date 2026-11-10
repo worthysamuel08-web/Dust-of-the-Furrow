@@ -1,6 +1,7 @@
 import { Composition, Folder } from "remotion";
 import { Main } from "./Main";
 import { RigPreview } from "./dev/RigPreview";
+import { StyleTest, STYLE_TEST_DURATION } from "./dev/StyleTest";
 import { Scene1 } from "./scenes/scene1/Scene1";
 import { SCENE1_DURATION, SCENE1_FPS } from "./scenes/scene1/timeline";
 import { Documentary, makeScenePreview } from "./film/Documentary";
@@ -74,6 +75,7 @@ export const RemotionRoot: React.FC = () => {
         />
       </Folder>
       <Folder name="Dev">
+        <Composition id="StyleTest-Silhouette" component={StyleTest} durationInFrames={STYLE_TEST_DURATION} fps={30} width={1920} height={1080} />
         <Composition id="Character-RigPreview" component={RigPreview} durationInFrames={180} fps={30} width={1280} height={720} />
       </Folder>
       <Composition

@@ -14,7 +14,22 @@ const SUN_DIR = new THREE.Vector3(...SUN_DIRECTION).normalize();
 const SUN_TARGET = new THREE.Vector3(-1.3, 0.5, -1.0);
 const SHAFT_LENGTH = 2.9;
 
+/** Light colours per look. "textured" values are the originals used by Scenes 1–2. */
+const LIGHT_PALETTES = {
+  textured: {
+    beam: "#ffd9a0", halo: "#ffe2b0", sun: "#ffd7a8", sunMax: 3.4,
+    hemiSky: "#b3aa9a", hemiGround: "#4a3826", hemi: [0.55, 0.95], bounce: "#ffbe80", ember: "#ff8a3d",
+  },
+  // dusky purple shadows, amber light: the reference film's palette
+  stylized: {
+    beam: "#ffb867", halo: "#ffc277", sun: "#ffad5c", sunMax: 3.8,
+    hemiSky: "#8a78c0", hemiGround: "#2a1f33", hemi: [0.7, 1.05], bounce: "#ff9f5a", ember: "#ff7a33",
+  },
+} as const;
+
 export type CottageLightingProps = {
+  /** Colour palette of the lights. */
+  look?: keyof typeof LIGHT_PALETTES;
   frame: number;
   /** 0 = pre-dawn gloom, 1 = full morning sun through the window. */
   sun: number;
@@ -61,7 +76,8 @@ const shaftGeometry = (spread: number) => {
 
 const DUST_COUNT = 140;
 
-export const CottageLighting: React.FC<CottageLightingProps> = ({ frame, sun, ember }) => {
+export const CottageLighting: React.FC<CottageLightingProps> = ({ frame, sun, ember, look = "textured" }) => {
+  const L = LIGHT_PALETTES[look];
   const sunRef = useRef<THREE.DirectionalLight>(null);
 
   const shaft = useMemo(() => {
@@ -119,6 +135,9 @@ export const CottageLighting: React.FC<CottageLightingProps> = ({ frame, sun, em
   const leakMat = useMemo(() => new THREE.MeshBasicMaterial({ toneMapped: false, fog: false }), []);
 
   // --- per-frame updates (pure functions of frame/sun) ---------------------
+  shaft.innerMat.color.set(L.beam);
+  shaft.outerMat.color.set(L.beam);
+  glow.color.set(L.halo);
   shaft.innerMat.opacity = 0.16 * sun;
   shaft.outerMat.opacity = 0.07 * sun;
   glow.opacity = 0.22 * sun;
@@ -171,8 +190,8 @@ export const CottageLighting: React.FC<CottageLightingProps> = ({ frame, sun, em
       <directionalLight
         ref={sunRef}
         position={sunPos}
-        color="#ffd7a8"
-        intensity={lerp(0.05, 3.4, sun)}
+        color={L.sun}
+        intensity={lerp(0.05, L.sunMax, sun)}
         castShadow
         shadow-mapSize={[1024, 1024]}
         shadow-bias={-0.0004}
@@ -185,13 +204,13 @@ export const CottageLighting: React.FC<CottageLightingProps> = ({ frame, sun, em
         shadow-camera-far={18}
       />
       {/* ambient skylight seeping through the thatch, door gaps and window */}
-      <hemisphereLight args={["#b3aa9a", "#4a3826", lerp(0.55, 0.95, sun)]} />
+      <hemisphereLight args={[L.hemiSky, L.hemiGround, lerp(L.hemi[0], L.hemi[1], sun)]} />
       {/* warm bounce from the sunlit patch */}
-      <pointLight position={[-1.2, 0.5, -0.9]} color="#ffbe80" intensity={lerp(0, 1.4, sun)} distance={4} decay={1.6} />
+      <pointLight position={[-1.2, 0.5, -0.9]} color={L.bounce} intensity={lerp(0, 1.4, sun)} distance={4} decay={1.6} />
       {/* hearth embers */}
       <pointLight
         position={[HEARTH.x, 0.3, HEARTH.z]}
-        color="#ff8a3d"
+        color={L.ember}
         intensity={1.6 * ember * flicker}
         distance={5}
         decay={1.5}
