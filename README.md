@@ -24,11 +24,42 @@ On an older Windows PC: render the 720p version first. If the 3D layer is black 
 the render fails with a WebGL error, add `-- --gl=swangle` (software rendering: slow but always works),
 e.g. `npm run render:scene1:720p -- --gl=swangle`. With a decent GPU, add `-- --concurrency=2` to speed up.
 
+### Scene 2 — "Three Promises" (12 s)
+Walter sits on the foot of the bed. As the narrator promises the day ahead ("you'll reap another
+man's harvest, be summoned to his court, and see what happens to a neighbour who said no"), three
+hand-inked vellum cards land beside him, each with a low drum hit; his eyes flick to each card before
+his head follows, his brow knits on "no", and the scene cuts to black.
+```bash
+npm run render:scene2          # 1920x1080 → out/scene2-three-promises.mp4
+npm run render:scene2:720p     # 1280x720
+```
+Preview: **Dust-of-the-Furrow → Scene2-ThreePromises** in `npm run dev`.
+
+### The whole film so far
+**Dust-of-the-Furrow → Documentary** plays every finished scene in order (currently Scenes 1–2, 27 s).
+```bash
+npm run render:film            # 1920x1080 → out/the-dust-of-the-furrow.mp4
+npm run render:film:720p
+```
+To add a scene: build it in `src/scenes/sceneN/`, add its narration to `src/film/narration.ts`, and
+append one entry to `src/film/scenes.ts`; the Documentary picks it up automatically.
+
+**Narration subtitles.** Until the voice-over is recorded, Scene 2 and the Documentary show the
+narration as subtitles (timed from `src/film/narration.ts`) so pacing can be judged. For a clean
+render: `npm run render:film -- --props='{"showNarration":false}'` (or toggle it in the Studio's props panel).
+Scene cues (e.g. Scene 2's cards) are derived from the same word timings, so when the real VO is recorded
+only `narration.ts` changes and the animation follows.
+
+The full 56-scene storyboard is in `docs/storyboard.md` (validate with `python3 docs/check-storyboard.py`).
+
 ### Where things live
 | Path | Purpose |
 |---|---|
 | `src/scenes/scene1/timeline.ts` | **All timing**: camera keys, sunrise, body + face keyframes, blinks, IK reaches |
 | `src/scenes/scene1/Scene1.tsx` | Assembles the 3D world, character, title card, vignette, fade |
+| `src/scenes/scene2/` | Scene 2: `timeline.ts` (cues from narration, poses, camera), `Scene2.tsx`, `PromiseCards.tsx` (SVG cards) |
+| `src/film/` | `scenes.ts` (running order), `Documentary.tsx` (whole film), `narration.ts` (script + timing), `NarrationSubtitles.tsx` |
+| `public/sfx/drum-hit.wav` | Synthesised drum hit used in Scene 2 |
 | `src/characters/stickman/` | Reusable 2D character: `Stickman.tsx` (rig/body), `Face.tsx`, `rig.ts` (pose type, presets, IK, blink), `shapes2d.tsx` (flat drawing primitives) |
 | `src/environments/cottage/` | Reusable cottage set: `layout.ts` (dimensions), `Structure.tsx` (frame, walls, roof, cruck), `Furnishings.tsx`, `Lighting.tsx`, `materials.ts` |
 | `src/engine/` | Shared: deterministic keyframing/easing (`animation.ts`), `CameraRig.tsx`, seeded procedural textures (`textures.ts`) |

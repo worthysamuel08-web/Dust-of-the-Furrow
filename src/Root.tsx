@@ -3,6 +3,12 @@ import { Main } from "./Main";
 import { RigPreview } from "./dev/RigPreview";
 import { Scene1 } from "./scenes/scene1/Scene1";
 import { SCENE1_DURATION, SCENE1_FPS } from "./scenes/scene1/timeline";
+import { Documentary, makeScenePreview } from "./film/Documentary";
+import { FILM_DURATION, FILM_FPS } from "./film/scenes";
+import { SCENE2_DURATION, SCENE2_FPS } from "./scenes/scene2/timeline";
+
+const Scene2Preview = makeScenePreview(2);
+const NARRATION_ON = { showNarration: true };
 
 export const FPS = 30;
 
@@ -27,6 +33,44 @@ export const RemotionRoot: React.FC = () => {
           fps={SCENE1_FPS}
           width={1280}
           height={720}
+        />
+        {/* Scene 2 on its own (narration subtitles on by default; set showNarration to false for a clean render) */}
+        <Composition
+          id="Scene2-ThreePromises"
+          component={Scene2Preview}
+          durationInFrames={SCENE2_DURATION}
+          fps={SCENE2_FPS}
+          width={1920}
+          height={1080}
+          defaultProps={NARRATION_ON}
+        />
+        <Composition
+          id="Scene2-ThreePromises-720p"
+          component={Scene2Preview}
+          durationInFrames={SCENE2_DURATION}
+          fps={SCENE2_FPS}
+          width={1280}
+          height={720}
+          defaultProps={NARRATION_ON}
+        />
+        {/* The film so far: every finished scene in order (src/film/scenes.ts) */}
+        <Composition
+          id="Documentary"
+          component={Documentary}
+          durationInFrames={FILM_DURATION}
+          fps={FILM_FPS}
+          width={1920}
+          height={1080}
+          defaultProps={NARRATION_ON}
+        />
+        <Composition
+          id="Documentary-720p"
+          component={Documentary}
+          durationInFrames={FILM_DURATION}
+          fps={FILM_FPS}
+          width={1280}
+          height={720}
+          defaultProps={NARRATION_ON}
         />
       </Folder>
       <Folder name="Dev">
