@@ -4,11 +4,13 @@
  * scripts/build-audio.py speaks src/film/script.json (narration + dialogue) and
  * writes src/film/narration-timing.json: for every scene, each line's speaker,
  * text, real start/end in the scene's voice track, and a mouth envelope for
- * lip-sync. Word times are spread across each line by length, so scenes can cue
- * animation on a word ("show the card when the narrator says 'reap'"); when the
- * audio is rebuilt every cue follows automatically.
+ * lip-sync. scripts/align-words.py then measures when every word is really
+ * spoken (speech recognition on the built tracks) into src/film/word-timing.json,
+ * so scenes can cue animation exactly on a word ("show the card when the narrator
+ * says 'reap'"). Rebuild both after changing the script: every cue follows.
  */
 import TIMING from "./narration-timing.json";
+import WORDS from "./word-timing.json";
 
 export type SpokenLine = {
   /** "narrator" or a cast id (src/film/generic/cast.ts). */
@@ -29,13 +31,15 @@ export type SceneNarration = {
   /** Length of the spoken part (first line start → last line end). */
   audioSec?: number;
   lines: SpokenLine[];
+  /** Measured [start, end] (seconds, scene-relative) of every word, in script order. */
+  words?: [number, number][];
 };
 
 export type SceneTiming = SceneNarration & { title: string; frames: number };
 export const SCENE_TIMING = TIMING as unknown as Record<string, SceneTiming>;
 
 export const NARRATION: Record<number, SceneNarration> = Object.fromEntries(
-  Object.entries(SCENE_TIMING).map(([n, t]) => [Number(n), { text: t.text, startSec: t.startSec, audioSec: t.audioSec, lines: t.lines }]),
+  Object.entries(SCENE_TIMING).map(([n, t]) => [Number(n), { text: t.text, startSec: t.startSec, audioSec: t.audioSec, lines: t.lines, words: (WORDS as unknown as Record<string, [number, number][]>)[n] }]),
 );
 
 /** Path (in /public) of a scene's voice track (narration + dialogue). */
@@ -43,9 +47,16 @@ export const narrationFile = (scene: number) => `audio/voice/s${String(scene).pa
 
 export type TimedWord = { word: string; start: number; end: number; who: string };
 
-/** Start/end time (seconds, scene-relative) of every word, spread across each line by length. */
+/**
+ * Start/end time (seconds, scene-relative) of every word: the measured times
+ * when available, otherwise spread across each line by length.
+ */
 export const wordTimings = (n: SceneNarration): TimedWord[] => {
   const out: TimedWord[] = [];
+  const all = n.lines.flatMap((l) => l.text.split(/\s+/).filter(Boolean).map((word) => ({ word, who: l.who })));
+  if (n.words && n.words.length === all.length) {
+    return all.map((w, i) => ({ ...w, start: n.words![i][0], end: n.words![i][1] }));
+  }
   for (const line of n.lines) {
     const words = line.text.split(/\s+/).filter(Boolean);
     const weights = words.map((w) => w.replace(/[^\p{L}\p{N}']/gu, "").length + 2);

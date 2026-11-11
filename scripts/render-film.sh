@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-# Render the full documentary in chunks, then join them losslessly.
+# Render the full documentary in chunks (picture only), join them losslessly,
+# then add the soundtrack rendered once in one piece. (Joining chunks that each
+# carry their own AAC audio leaves ~40 ms dropouts at every join.)
 #
 #   scripts/render-film.sh [composition] [chunks] [extra remotion flags...]
 #   e.g.  scripts/render-film.sh Documentary-720p 6
@@ -36,8 +38,14 @@ for ((i = 0; i < CHUNKS; i++)); do
     continue
   fi
   echo "rendering chunk $i: frames $FROM-$TO of $TOTAL"
-  npx remotion render "$COMP" "$OUT.tmp.mp4" --frames="$FROM-$TO" --log=error "${EXTRA[@]}"
+  npx remotion render "$COMP" "$OUT.tmp.mp4" --frames="$FROM-$TO" --muted --log=error "${EXTRA[@]}"
   mv "$OUT.tmp.mp4" "$OUT"
 done
-ffmpeg -y -loglevel error -f concat -safe 0 -i "$DIR/list.txt" -c copy "out/${COMP}.mp4"
+ffmpeg -y -loglevel error -f concat -safe 0 -i "$DIR/list.txt" -an -c copy "$DIR/picture.mp4"
+if [ ! -s "$DIR/sound.wav" ]; then
+  echo "rendering soundtrack"
+  npx remotion render "$COMP" "$DIR/sound.tmp.wav" --codec=wav --log=error "${EXTRA[@]}"
+  mv "$DIR/sound.tmp.wav" "$DIR/sound.wav"
+fi
+ffmpeg -y -loglevel error -i "$DIR/picture.mp4" -i "$DIR/sound.wav" -map 0:v -map 1:a -c:v copy -c:a aac -b:a 192k -shortest "out/${COMP}.mp4"
 echo "done: out/${COMP}.mp4"
