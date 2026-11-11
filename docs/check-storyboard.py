@@ -32,6 +32,10 @@ SECTIONS = [
     ("6 · Nightfall", 49, 56),
 ]
 
+# When the audio has been built, scene lengths come from the real voice track.
+_timing = PATH.parent.parent / "src" / "film" / "narration-timing.json"
+REAL = __import__("json").load(open(_timing)) if _timing.exists() else None
+
 HEAD = re.compile(r"^#### Scene (\d+) · (.+?) — ⏱ \d+$", re.M)
 NARR = re.compile(r'^\*\*Narration:\*\* "(.+?)"\s*$', re.M)
 
@@ -60,6 +64,8 @@ def main() -> int:
         m = NARR.search(body)
         words = len(m[1].split()) if m else 0
         dur = FIXED.get(n, max(5, math.ceil(words / WPS) + BREATH)) + EXTRA.get(n, 0)
+        if REAL:  # the film's real scene lengths, from the audio build
+            dur = round(REAL[str(n)]["frames"] / 30)
         scenes[n] = (title, words, dur)
         out.append(text[last:h.start()] + f"#### Scene {n} · {title} — ⏱ {dur}" + body)
         last = end
@@ -77,7 +83,7 @@ def main() -> int:
         "| Section | Scenes | Count | Scene lengths | Duration |\n|---|---|---|---|---|\n"
         + "\n".join(rows)
         + f"\n| **Total** | **1–56** | **{len(scenes)}** | **{min(durs)}–{max(durs)} s** | **{fmt(total)} ({total} s)** |\n\n"
-        f"Narration: **{words} words**. Shortest scene {min(durs)} s, longest {max(durs)} s.\n"
+        f"Narrated words: **{words}** (dialogue is listed per scene). Shortest scene {min(durs)} s, longest {max(durs)} s.\n"
         "<!-- /RUNTIME-TABLE -->"
     )
     text = re.sub(r"<!-- RUNTIME-TABLE -->.*?(<!-- /RUNTIME-TABLE -->|$)", table, text, count=1, flags=re.S | re.M) \
@@ -87,7 +93,7 @@ def main() -> int:
         errors.append(f"total {fmt(total)} outside {fmt(TARGET[0])}–{fmt(TARGET[1])}")
     for n, (_, w, d) in scenes.items():
         spoken = d - (2 if n == 1 else 0) - EXTRA.get(n, 0)
-        if w / spoken > WPS + 0.05:
+        if not REAL and w / spoken > WPS + 0.05:
             errors.append(f"scene {n}: {w} words in {spoken} s is too fast")
 
     if not check_only:

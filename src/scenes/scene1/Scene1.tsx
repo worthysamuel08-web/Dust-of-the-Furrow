@@ -14,7 +14,8 @@ import { faceCameraYaw, headWorld, shotAt } from "../../engine/shots";
 import { radialTexture } from "../../engine/textures";
 import { BED, Cottage, SLEEPER } from "../../environments/cottage/Cottage";
 import { CinematicFX } from "../../style/CinematicFX";
-import { FilmGrain, GlowTitle, Letterbox, Vignette } from "../../style/Frame";
+import { DateStamp, FilmGrain, Letterbox, Vignette } from "../../style/Frame";
+import { NARRATION, mouthAt } from "../../film/narration";
 import {
   SCENE1_DURATION,
   SCENE1_SHOTS,
@@ -50,6 +51,9 @@ const World: React.FC = () => {
   const shot = shotAt(SCENE1_SHOTS, frame, SCENE1_DURATION);
   const sun = sunAt(frame);
   const pose = characterPoseAt(frame);
+  // lip-sync Walter's line ("Ugh. My back.")
+  const speech = mouthAt(NARRATION[1], "walter", frame, 30);
+  if (speech > 0) pose.face = { ...pose.face, mouthOpen: Math.max(pose.face.mouthOpen, speech * 0.8) };
   const yaw = faceCameraYaw(shot.position, SLEEPER);
   const focus = headWorld(pose, SLEEPER, yaw);
   const fog = new THREE.Color("#120d1a").lerp(new THREE.Color("#1d1628"), sun);
@@ -92,7 +96,7 @@ export const Scene1: React.FC = () => {
       </ThreeCanvas>
       <Vignette strength={0.55} />
       <FilmGrain opacity={0.08} />
-      <GlowTitle text="ENGLAND, 1320" from={30} to={140} y={0.24} />
+      <DateStamp date="AUGUST 1320" time="DAWN · AN ENGLISH MANOR" from={20} to={150} />
       <AbsoluteFill style={{ backgroundColor: "#000", opacity: 1 - fadeInAt(frame) }} />
       <Letterbox />
     </AbsoluteFill>

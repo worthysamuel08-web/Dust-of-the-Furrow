@@ -21,7 +21,11 @@ export type ExprId =
   | "proud"
   | "stern"
   | "shout"
-  | "dreamy";
+  | "dreamy"
+  | "laugh"
+  | "cry"
+  | "nervous"
+  | "gasp";
 
 const F = (p: Partial<FacePose>): FacePose => ({ ...NEUTRAL_FACE, eyeOpenL: 0.85, eyeOpenR: 0.85, ...p });
 
@@ -29,17 +33,21 @@ export const EXPRESSIONS: Record<ExprId, FacePose> = {
   neutral: F({}),
   tired: F({ eyeOpenL: 0.58, eyeOpenR: 0.56, browTiltL: 0.3, browTiltR: 0.3, mouthSmile: -0.12 }),
   worried: F({ eyeOpenL: 0.88, eyeOpenR: 0.86, browRaiseL: 0.4, browRaiseR: 0.4, browTiltL: 0.6, browTiltR: 0.6, mouthSmile: -0.35, mouthWidth: 0.24 }),
-  sad: F({ eyeOpenL: 0.6, eyeOpenR: 0.58, browRaiseL: 0.15, browRaiseR: 0.15, browTiltL: 0.75, browTiltR: 0.75, mouthSmile: -0.55, lookY: -0.5 }),
-  happy: F({ eyeOpenL: 0.78, eyeOpenR: 0.78, browRaiseL: 0.3, browRaiseR: 0.3, mouthSmile: 0.65, mouthWidth: 0.34 }),
+  sad: F({ eyeOpenL: 0.6, eyeOpenR: 0.58, browRaiseL: 0.15, browRaiseR: 0.15, browTiltL: 0.8, browTiltR: 0.8, mouthSmile: -0.55, lookY: -0.5, tears: 0.25 }),
+  happy: F({ happyEyes: 1, browRaiseL: 0.35, browRaiseR: 0.35, mouthSmile: 0.7, mouthWidth: 0.36 }),
+  laugh: F({ happyEyes: 1, browRaiseL: 0.5, browRaiseR: 0.5, mouthSmile: 0.9, mouthOpen: 0.75, mouthWidth: 0.42 }),
+  cry: F({ eyeOpenL: 0.5, eyeOpenR: 0.5, browRaiseL: 0.3, browRaiseR: 0.3, browTiltL: 0.85, browTiltR: 0.85, mouthSmile: -0.6, mouthOpen: 0.25, tears: 1, lookY: -0.4 }),
+  nervous: F({ eyeOpenL: 0.95, eyeOpenR: 0.95, pupil: 0.38, browRaiseL: 0.45, browRaiseR: 0.45, browTiltL: 0.5, browTiltR: 0.5, mouthSmile: -0.25, mouthWidth: 0.22, sweat: 1 }),
+  gasp: F({ eyeOpenL: 1.3, eyeOpenR: 1.3, pupil: 0.3, browRaiseL: 1, browRaiseR: 1, mouthOpen: 0.55, mouthWidth: 0.18 }),
   smile: F({ eyeOpenL: 0.72, eyeOpenR: 0.72, mouthSmile: 0.4 }),
   angry: F({ eyeOpenL: 0.7, eyeOpenR: 0.7, browRaiseL: -0.5, browRaiseR: -0.5, browTiltL: -0.65, browTiltR: -0.65, mouthSmile: -0.45 }),
-  shocked: F({ eyeOpenL: 1.1, eyeOpenR: 1.1, browRaiseL: 0.9, browRaiseR: 0.9, mouthOpen: 0.6, mouthWidth: 0.24 }),
-  scared: F({ eyeOpenL: 1.0, eyeOpenR: 1.0, browRaiseL: 0.7, browRaiseR: 0.7, browTiltL: 0.6, browTiltR: 0.6, mouthOpen: 0.25, mouthSmile: -0.4 }),
+  shocked: F({ eyeOpenL: 1.25, eyeOpenR: 1.25, pupil: 0.32, browRaiseL: 0.95, browRaiseR: 0.95, mouthOpen: 0.5, mouthWidth: 0.2 }),
+  scared: F({ eyeOpenL: 1.1, eyeOpenR: 1.1, pupil: 0.36, browRaiseL: 0.75, browRaiseR: 0.75, browTiltL: 0.65, browTiltR: 0.65, mouthOpen: 0.2, mouthSmile: -0.4, sweat: 0.7 }),
   determined: F({ eyeOpenL: 0.78, eyeOpenR: 0.78, browRaiseL: -0.25, browRaiseR: -0.25, browTiltL: -0.3, browTiltR: -0.3, mouthSmile: -0.1 }),
   sleeping: F({ eyeOpenL: 0, eyeOpenR: 0, mouthOpen: 0.08, mouthWidth: 0.2 }),
   squint: F({ eyeOpenL: 0.35, eyeOpenR: 0.33, browRaiseL: -0.3, browRaiseR: -0.3 }),
   confused: F({ eyeOpenL: 0.82, eyeOpenR: 0.72, browRaiseL: 0.75, browRaiseR: -0.1, browTiltL: 0.5, browTiltR: -0.25, mouthSmile: -0.3, mouthOpen: 0.1, mouthWidth: 0.2 }),
-  relieved: F({ eyeOpenL: 0.4, eyeOpenR: 0.4, browRaiseL: 0.3, browRaiseR: 0.3, browTiltL: 0.45, browTiltR: 0.45, mouthSmile: 0.3 }),
+  relieved: F({ eyeOpenL: 0.4, eyeOpenR: 0.4, browRaiseL: 0.3, browRaiseR: 0.3, browTiltL: 0.45, browTiltR: 0.45, mouthSmile: 0.35, tears: 0.5 }),
   grimace: F({ eyeOpenL: 0.45, eyeOpenR: 0.42, browRaiseL: -0.4, browRaiseR: -0.4, browTiltL: -0.3, browTiltR: -0.3, mouthSmile: -0.6, mouthWidth: 0.36 }),
   proud: F({ eyeOpenL: 0.68, eyeOpenR: 0.68, browRaiseL: 0.1, browRaiseR: 0.1, mouthSmile: 0.35 }),
   stern: F({ eyeOpenL: 0.7, eyeOpenR: 0.7, browRaiseL: -0.35, browRaiseR: -0.35, browTiltL: -0.4, browTiltR: -0.4, mouthSmile: -0.2 }),

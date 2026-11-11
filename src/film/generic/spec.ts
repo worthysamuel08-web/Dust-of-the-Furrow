@@ -35,7 +35,7 @@ export type ActorSpec = {
 export type AnimalSpec = { kind: AnimalKind; x: number; z: number; y?: number; face?: 1 | -1; vx?: number; scale?: number };
 export type DressingSpec = { kind: DressingKind; x: number; z: number; y?: number; rot?: number; scale?: number };
 
-export type ShotType = "wide" | "medium" | "close" | "high" | "low" | "group" | "extreme";
+export type ShotType = "wide" | "medium" | "close" | "high" | "low" | "group" | "extreme" | "ots";
 export type ShotSpec = {
   type: ShotType;
   /** Start, as a fraction of the scene (0 = first shot). */

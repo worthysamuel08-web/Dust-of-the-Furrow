@@ -36,6 +36,11 @@ export type FacePose = {
   mouthOpen: number;
   /** Mouth width relative to head radius (≈0.15..0.5) */
   mouthWidth: number;
+  /** Silhouette look extras (optional): ^ ^ eyes, pupil size (0.2..0.75), tear streaks, sweat drop — all 0..1. */
+  happyEyes?: number;
+  pupil?: number;
+  tears?: number;
+  sweat?: number;
 };
 
 export type StickmanPose = {
@@ -80,6 +85,10 @@ export const NEUTRAL_FACE: FacePose = {
   mouthSmile: 0,
   mouthOpen: 0,
   mouthWidth: 0.3,
+  happyEyes: 0,
+  pupil: 0.5,
+  tears: 0,
+  sweat: 0,
 };
 
 export const STANDING: StickmanPose = {

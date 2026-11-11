@@ -86,3 +86,37 @@ export const GlowTitle: React.FC<{
     </AbsoluteFill>
   );
 };
+
+/** Reference-style date / time stamp: light, letter-spaced, top left, with a thin rule. */
+export const DateStamp: React.FC<{ date: string; time: string; from: number; to: number }> = ({ date, time, from, to }) => {
+  const frame = useCurrentFrame();
+  const { height, width } = useVideoConfig();
+  if (frame < from || frame > to) return null;
+  const o = interpolate(frame, [from, from + 12, to - 12, to], [0, 1, 1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const bar = Math.max(0, (height - width / PICTURE_ASPECT) / 2);
+  return (
+    <div style={{ position: "absolute", top: bar + height * 0.06, left: width * 0.05, opacity: o, zIndex: 40, textAlign: "center", color: "#dfe6f2", textShadow: `0 0 ${height * 0.012}px rgba(160,190,255,0.6)` }}>
+      <div style={{ fontFamily: "Inter", fontWeight: 800, fontSize: height * 0.05, letterSpacing: "0.14em" }}>{date}</div>
+      <div style={{ height: 2, background: "rgba(223,230,242,0.7)", margin: `${height * 0.008}px auto`, width: "60%" }} />
+      <div style={{ fontFamily: "Inter", fontWeight: 800, fontSize: height * 0.024, letterSpacing: "0.3em" }}>{time}</div>
+    </div>
+  );
+};
+
+/** Wide letter-spaced title ("WHAT IF YOU…" style) that drifts open as it fades in. */
+export const SpacedTitle: React.FC<{ text: string; from: number; to: number }> = ({ text, from, to }) => {
+  const frame = useCurrentFrame();
+  const { height } = useVideoConfig();
+  if (frame < from || frame > to) return null;
+  const o = interpolate(frame, [from, from + 15, to - 12, to], [0, 1, 1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const spacing = interpolate(frame, [from, to], [0.32, 0.42]);
+  return (
+    <AbsoluteFill style={{ alignItems: "center", justifyContent: "center", zIndex: 42, pointerEvents: "none" }}>
+      {/* a soft dark band so the title reads over any shot */}
+      <div style={{ position: "absolute", left: 0, right: 0, height: height * 0.16, opacity: o, background: "linear-gradient(rgba(10,7,14,0), rgba(10,7,14,0.72) 30%, rgba(10,7,14,0.72) 70%, rgba(10,7,14,0))" }} />
+      <div style={{ position: "relative", opacity: o, fontFamily: "Inter", fontWeight: 800, fontSize: height * 0.038, letterSpacing: `${spacing}em`, color: "#f4efe6", textShadow: `0 0 ${height * 0.015}px rgba(255,190,120,0.55)` }}>
+        {text}
+      </div>
+    </AbsoluteFill>
+  );
+};

@@ -3,10 +3,12 @@
  * its narration clip (and optional subtitles) laid over it, plus the music bed.
  */
 import { Audio } from "@remotion/media";
-import { AbsoluteFill, Loop, Sequence, Series, staticFile, useVideoConfig } from "remotion";
+import { AbsoluteFill, Loop, Sequence, Series, interpolate, staticFile, useVideoConfig } from "remotion";
+import { SpacedTitle } from "../style/Frame";
+import { TakenCounter } from "./Hud";
 import { NARRATION, narrationFile } from "./narration";
 import { NarrationSubtitles } from "./NarrationSubtitles";
-import { FILM_DURATION, FILM_SCENES, type FilmScene } from "./scenes";
+import { FILM_DURATION, FILM_SCENES, sceneStart, type FilmScene } from "./scenes";
 
 export type FilmProps = {
   /** Show the narration as subtitles. */
@@ -38,6 +40,18 @@ export const SceneWithNarration: React.FC<{ scene: FilmScene; showNarration: boo
   );
 };
 
+/**
+ * Music level across the film (reference mix: about 10 dB under the voice):
+ * steady through the day, down for the darker Section 5 (scenes 40–48),
+ * swelling for the ending (scenes 55–56).
+ */
+const musicVolume = (f: number) => {
+  const dark0 = sceneStart(40), dark1 = sceneStart(49), end0 = sceneStart(55);
+  const dip = interpolate(f, [dark0 - 30, dark0 + 30, dark1 - 30, dark1 + 30], [0, 1, 1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const swell = interpolate(f, [end0, end0 + 90], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  return 0.42 - 0.16 * dip + 0.14 * swell;
+};
+
 export const Documentary: React.FC<FilmProps> = ({ showNarration, withVoice = true }) => (
   <AbsoluteFill style={{ backgroundColor: "#000" }}>
     <Series>
@@ -48,8 +62,21 @@ export const Documentary: React.FC<FilmProps> = ({ showNarration, withVoice = tr
       ))}
     </Series>
     <Sequence durationInFrames={FILM_DURATION} layout="none" name="Music">
-      <Audio src={staticFile("audio/music/bed.mp3")} volume={0.16} />
+      <Audio src={staticFile("audio/music/bed.mp3")} volume={musicVolume} />
     </Sequence>
+    {/* the persistent counter and the title card (reference-style) */}
+    <TakenCounter />
+    <SpacedTitle text="YOU WAKE UP AS A MEDIEVAL PEASANT" from={sceneStart(3) - 20} to={sceneStart(3) + 70} />
+    {/* a low impact at each section change, a whoosh on alternate scene changes */}
+    {FILM_SCENES.slice(1).map((s, i) => {
+      const section = [10, 20, 30, 40, 49].includes(s.number);
+      if (!section && i % 2) return null;
+      return (
+        <Sequence key={s.number} from={Math.max(0, sceneStart(s.number) - (section ? 0 : 6))} durationInFrames={30} layout="none">
+          <Audio src={staticFile(`audio/sfx/${section ? "impact" : "whoosh"}.mp3`)} volume={section ? 0.55 : 0.3} />
+        </Sequence>
+      );
+    })}
   </AbsoluteFill>
 );
 

@@ -61,8 +61,8 @@ export const SECTION_1_2: SceneSpec[] = [
     ember: 0.8,
     actors: [
       A("walter", -1.2, 0.25, "stand", { expr: [[0, "smile"], [0.78, "sad"]] }),
-      A("joan", -0.35, 0.55, "stand", { expr: [[0, "dreamy"], [0.78, "sad"]], look: 0.3 }),
-      A("hugh", 0.3, 0.85, "akimbo", { expr: [[0, "proud"], [0.78, "sad"]] }),
+      A("joan", -0.35, 0.55, "stand", { expr: [[0, "dreamy"], [0.2, "angry"], [0.36, "dreamy"], [0.78, "sad"]], look: 0.3 }),
+      A("hugh", 0.3, 0.85, "akimbo", { expr: [[0, "proud"], [0.35, "laugh"], [0.5, "proud"], [0.78, "sad"]] }),
       A("agnes", 0.85, 1.1, "stand", { face: -1, expr: [[0, "neutral"], [0.78, "sad"]] }),
       A("alice", 1.45, 0.85, "hold", { face: -1, prop: "baby", expr: [[0, "smile"], [0.6, "worried"], [0.78, "sad"]] }),
     ],
@@ -89,7 +89,7 @@ export const SECTION_1_2: SceneSpec[] = [
     dressing: [{ kind: "stool", x: 0.75, z: -1.0 }],
     shots: [{ type: "medium", at: 0 }, { type: "medium", at: 0.5, on: 2 }, { type: "close", at: 0.78, on: 2 }],
     overlays: [
-      { kind: "list", items: ["DARK BREAD", "WEAK ALE"], from: 0.4, to: sec(8, "You") - 0.1 },
+      { kind: "list", items: ["DARK BREAD", "WEAK ALE"], from: 0.4, to: sec(8, "Add") - 0.1 },
       { kind: "list", items: ["HOSE", "SHOES", "HOOD"], from: sec(8, "Add"), to: dur(8) - 0.3 },
     ],
   },
@@ -99,7 +99,7 @@ export const SECTION_1_2: SceneSpec[] = [
     set: "cottage",
     sun: 0.95,
     actors: [
-      A("walter", 1.35, 0.9, "stand", { expr: [[0, "neutral"], [0.45, "tired"], [0.7, "angry"], [0.85, "worried"]] }),
+      A("walter", 1.35, 0.9, "stand", { expr: [[0, "neutral"], [0.3, "shocked"], [0.5, "tired"], [0.62, "angry"], [0.8, "nervous"]] }),
       A("gilbert", 2.3, 1.0, "talk", { face: -1, prop: "tally", expr: "worried" }),
     ],
     shots: [{ type: "medium", at: 0, on: 1 }, { type: "medium", at: 0.42, on: 0 }, { type: "close", at: 0.72, on: 0 }],
@@ -146,7 +146,7 @@ export const SECTION_1_2: SceneSpec[] = [
     time: "morning",
     actors: [
       A("walter", 42.6, -2.1, "hold", { prop: "sack", expr: [[0, "neutral"], [0.6, "stern"]] }),
-      A("miller", 44.5, -2.3, "carry", { face: -1, prop: "bowl", expr: "smile" }),
+      A("miller", 44.5, -2.3, "carry", { face: -1, prop: "bowl", expr: [[0, "smile"], [0.45, "laugh"], [0.7, "smile"]] }),
     ],
     shots: [{ type: "wide", at: 0 }, { type: "medium", at: 0.38, on: 1 }, { type: "close", at: 0.7, on: 0 }],
     overlays: [
@@ -160,7 +160,7 @@ export const SECTION_1_2: SceneSpec[] = [
     set: "cottage",
     sun: 0.75,
     ember: 0.5,
-    actors: [A("walter", -2.0, 0.25, "crouch", { face: -1, expr: [[0, "scared"], [0.5, "shocked"]], look: 0.4 })],
+    actors: [A("walter", -2.0, 0.25, "crouch", { face: -1, expr: [[0, "nervous"], [0.5, "gasp"]], look: 0.4 })],
     dressing: [{ kind: "quern", x: -2.5, z: 0.45 }],
     shots: [{ type: "medium", at: 0 }, { type: "close", at: 0.45 }],
     grade: "none",
@@ -178,7 +178,7 @@ export const SECTION_1_2: SceneSpec[] = [
     time: "morning",
     actors: [
       A("walter", 16.8, -5.4, "gesture", { expr: "angry", show: [0, 0.55] }),
-      A("walter", 16.8, -5.4, "stand", { expr: "worried", show: [0.55, 1] }),
+      A("walter", 16.8, -5.4, "stand", { expr: "nervous", show: [0.55, 1] }),
       A("gilbert", 21.5, -6.0, "crossArms", { face: -1, prop: "tally", expr: "stern" }),
     ],
     animals: [{ kind: "pigeons", x: 17, z: -8, y: 1.2 }],
@@ -239,7 +239,7 @@ export const SECTION_1_2: SceneSpec[] = [
       { type: "close", at: 0.72 },
     ],
     overlays: [
-      { kind: "label", text: "≈30 STRIPS · ≈15 ACRES", where: "top", from: sec(18, "It's"), to: dur(18) - 0.3 },
+      { kind: "label", text: "≈30 STRIPS · ≈15 ACRES", where: "top", from: sec(18, "About"), to: dur(18) - 0.3 },
       { kind: "label", text: "NO HEDGES · NO FENCES", from: sec(18, "unfenced"), to: dur(18) - 0.3 },
     ],
   },

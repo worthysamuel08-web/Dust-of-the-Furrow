@@ -1,0 +1,1218 @@
+{
+ "_about": "The spoken script, in the reference film's pattern: second-person present-tense narration in short beats, in-scene dialogue, deliberate pauses. 'who' is 'narrator' or a cast id (src/film/generic/cast.ts). 'pause' = silence after the line, in seconds (default 0.5 after narration, 0.35 after dialogue). Facts follow docs/storyboard.md. Build the audio with scripts/build-audio.py.",
+ "1": [
+  {
+   "who": "narrator",
+   "text": "Imagine this.",
+   "pause": 0.7
+  },
+  {
+   "who": "narrator",
+   "text": "You open your eyes. Smoke. Straw. Cold.",
+   "pause": 0.6
+  },
+  {
+   "who": "narrator",
+   "text": "England, thirteen-twenty.",
+   "pause": 0.9
+  },
+  {
+   "who": "walter",
+   "text": "Ugh. My back."
+  }
+ ],
+ "2": [
+  {
+   "who": "narrator",
+   "text": "By tonight, you'll reap another man's harvest,",
+   "pause": 0.45
+  },
+  {
+   "who": "narrator",
+   "text": "be summoned to his court,",
+   "pause": 0.45
+  },
+  {
+   "who": "narrator",
+   "text": "and see what happens to a man who said no."
+  }
+ ],
+ "3": [
+  {
+   "who": "narrator",
+   "text": "The other half of the bed is already cold.",
+   "pause": 0.6
+  },
+  {
+   "who": "walter",
+   "text": "Alice?",
+   "pause": 1.28
+  },
+  {
+   "who": "narrator",
+   "text": "She rose before you. She always does.",
+   "pause": 0.5
+  }
+ ],
+ "4": [
+  {
+   "who": "narrator",
+   "text": "On the lord's rolls, you have a name. Walter atte Brook.",
+   "pause": 0.9
+  },
+  {
+   "who": "narrator",
+   "text": "And one more word. Nativus.",
+   "pause": 1.28
+  },
+  {
+   "who": "narrator",
+   "text": "Born unfree.",
+   "pause": 0.9
+  },
+  {
+   "who": "narrator",
+   "text": "Your land, your labour, even your daughters' marriages answer to one man.",
+   "pause": 0.5
+  }
+ ],
+ "5": [
+  {
+   "who": "narrator",
+   "text": "Look around. Oak posts. Hazel. Mud.",
+   "pause": 0.9
+  },
+  {
+   "who": "narrator",
+   "text": "No chimney.",
+   "pause": 0.45
+  },
+  {
+   "who": "walter",
+   "text": "Every. Single. Morning.",
+   "pause": 0.5
+  },
+  {
+   "who": "narrator",
+   "text": "The smoke finds its own way out, through the thatch.",
+   "pause": 0.5
+  }
+ ],
+ "6": [
+  {
+   "who": "narrator",
+   "text": "Alice is back from the well.",
+   "pause": 0.45
+  },
+  {
+   "who": "alice",
+   "text": "Fire's nearly out. Again.",
+   "pause": 0.5
+  },
+  {
+   "who": "narrator",
+   "text": "She coaxes last night's embers back to life.",
+   "pause": 0.5
+  }
+ ],
+ "7": [
+  {
+   "who": "narrator",
+   "text": "Four children survive.",
+   "pause": 0.9
+  },
+  {
+   "who": "narrator",
+   "text": "Joan, fifteen. Already eyeing a boy.",
+   "pause": 0.5
+  },
+  {
+   "who": "joan",
+   "text": "I am not!",
+   "pause": 0.45
+  },
+  {
+   "who": "narrator",
+   "text": "Hugh, nine.",
+   "pause": 0.5
+  },
+  {
+   "who": "hugh",
+   "text": "Nine and a half!",
+   "pause": 0.45
+  },
+  {
+   "who": "narrator",
+   "text": "Little Agnes. And the baby, who coughed half the night.",
+   "pause": 1.76
+  },
+  {
+   "who": "narrator",
+   "text": "Two more lie in the churchyard.",
+   "pause": 0.5
+  }
+ ],
+ "8": [
+  {
+   "who": "narrator",
+   "text": "Breakfast. Dark bread and weak ale.",
+   "pause": 0.45
+  },
+  {
+   "who": "walter",
+   "text": "Like chewing a roof tile.",
+   "pause": 0.45
+  },
+  {
+   "who": "narrator",
+   "text": "Everyone drinks ale. Even the children.",
+   "pause": 0.9
+  },
+  {
+   "who": "narrator",
+   "text": "Add hose, shoes and a hood. You're dressed.",
+   "pause": 0.5
+  }
+ ],
+ "9": [
+  {
+   "who": "narrator",
+   "text": "A knock.",
+   "pause": 0.5
+  },
+  {
+   "who": "gilbert",
+   "text": "Morning, Walter. Boon day.",
+   "pause": 0.45
+  },
+  {
+   "who": "walter",
+   "text": "Today?",
+   "pause": 0.45
+  },
+  {
+   "who": "gilbert",
+   "text": "Today. And Walter, your pig was in the lord's barley again.",
+   "pause": 0.45
+  },
+  {
+   "who": "walter",
+   "text": "That pig hates me.",
+   "pause": 0.5
+  },
+  {
+   "who": "narrator",
+   "text": "Gilbert is the reeve. A villein like you, driving his own neighbours.",
+   "pause": 0.5
+  }
+ ],
+ "10": [
+  {
+   "who": "narrator",
+   "text": "Outside, the village is waking up.",
+   "pause": 0.9
+  },
+  {
+   "who": "narrator",
+   "text": "One muddy street. Every family has a croft, a pig, and one grudge.",
+   "pause": 0.45
+  },
+  {
+   "who": "villagerC",
+   "text": "Morning, Walter!",
+   "pause": 0.45
+  },
+  {
+   "who": "walter",
+   "text": "Morning.",
+   "pause": 0.45
+  }
+ ],
+ "11": [
+  {
+   "who": "narrator",
+   "text": "Nobody here owns a clock.",
+   "pause": 0.45
+  },
+  {
+   "who": "walter",
+   "text": "So what time is it?",
+   "pause": 0.45
+  },
+  {
+   "who": "narrator",
+   "text": "Roughly, morning.",
+   "pause": 0.9
+  },
+  {
+   "who": "narrator",
+   "text": "Your day is measured by the sun, and the church bell.",
+   "pause": 0.5
+  }
+ ],
+ "12": [
+  {
+   "who": "narrator",
+   "text": "Your grain must be ground at the lord's mill.",
+   "pause": 0.45
+  },
+  {
+   "who": "miller",
+   "text": "One scoop for you, and one for me.",
+   "pause": 0.45
+  },
+  {
+   "who": "walter",
+   "text": "That was two for you.",
+   "pause": 0.5
+  },
+  {
+   "who": "narrator",
+   "text": "The miller takes his toll. And probably a little more.",
+   "pause": 0.5
+  }
+ ],
+ "13": [
+  {
+   "who": "narrator",
+   "text": "So you keep a hand-quern hidden under the straw.",
+   "pause": 0.45
+  },
+  {
+   "who": "walter",
+   "text": "What quern?",
+   "pause": 0.5
+  },
+  {
+   "who": "narrator",
+   "text": "Grinding at home is forbidden. At St Albans, an abbot will pave his parlour with confiscated querns.",
+   "pause": 0.9
+  },
+  {
+   "who": "narrator",
+   "text": "And in 1381, rebels will rip them up.",
+   "pause": 0.5
+  }
+ ],
+ "14": [
+  {
+   "who": "narrator",
+   "text": "Those are the lord's pigeons. Only the lord may keep doves.",
+   "pause": 0.45
+  },
+  {
+   "who": "walter",
+   "text": "Shoo! Get off!",
+   "pause": 0.45
+  },
+  {
+   "who": "gilbert",
+   "text": "I wouldn't, Walter.",
+   "pause": 0.5
+  },
+  {
+   "who": "narrator",
+   "text": "They eat your seed corn. You may not touch them.",
+   "pause": 0.5
+  }
+ ],
+ "15": [
+  {
+   "who": "narrator",
+   "text": "Every man over twelve is in a tithing. Ten neighbours, answerable for each other.",
+   "pause": 1.28
+  },
+  {
+   "who": "narrator",
+   "text": "If one of them runs,",
+   "pause": 1.44
+  },
+  {
+   "who": "narrator",
+   "text": "the others pay.",
+   "pause": 0.5
+  }
+ ],
+ "16": [
+  {
+   "who": "narrator",
+   "text": "Sir Roger owns this manor.",
+   "pause": 0.9
+  },
+  {
+   "who": "narrator",
+   "text": "You may never speak a word to him.",
+   "pause": 0.45
+  },
+  {
+   "who": "walter",
+   "text": "Never even seen him.",
+   "pause": 0.6
+  },
+  {
+   "who": "narrator",
+   "text": "But you will feel him every hour of your life.",
+   "pause": 0.5
+  }
+ ],
+ "17": [
+  {
+   "who": "narrator",
+   "text": "At the well, Joan and the miller's boy are very much not talking.",
+   "pause": 0.5
+  },
+  {
+   "who": "millerBoy",
+   "text": "Hello, Joan.",
+   "pause": 0.45
+  },
+  {
+   "who": "joan",
+   "text": "Hello.",
+   "pause": 0.6
+  },
+  {
+   "who": "narrator",
+   "text": "Very noticeably.",
+   "pause": 0.5
+  }
+ ],
+ "18": [
+  {
+   "who": "narrator",
+   "text": "Then you see it. Your land.",
+   "pause": 0.9
+  },
+  {
+   "who": "narrator",
+   "text": "Not one farm. About thirty narrow strips, scattered across vast unfenced fields.",
+   "pause": 0.45
+  },
+  {
+   "who": "walter",
+   "text": "Which ones are mine again?",
+   "pause": 0.45
+  }
+ ],
+ "19": [
+  {
+   "who": "narrator",
+   "text": "Year after year, the plough heaps each strip into a ridge.",
+   "pause": 1.6
+  },
+  {
+   "who": "narrator",
+   "text": "Remember these shapes.",
+   "pause": 0.5
+  }
+ ],
+ "20": [
+  {
+   "who": "hayward",
+   "text": "To the lord's corn! All of you!",
+   "pause": 0.45
+  },
+  {
+   "who": "walter",
+   "text": "Here we go.",
+   "pause": 0.45
+  },
+  {
+   "who": "narrator",
+   "text": "The hayward is calling the village to work.",
+   "pause": 0.5
+  }
+ ],
+ "21": [
+  {
+   "who": "narrator",
+   "text": "Today is a boon day.",
+   "pause": 0.9
+  },
+  {
+   "who": "narrator",
+   "text": "Everyone but your wife must reap the lord's field first.",
+   "pause": 0.45
+  },
+  {
+   "who": "hugh",
+   "text": "And our wheat?",
+   "pause": 0.45
+  },
+  {
+   "who": "walter",
+   "text": "Our wheat waits.",
+   "pause": 0.45
+  }
+ ],
+ "22": [
+  {
+   "who": "narrator",
+   "text": "Grab a fistful. Cut. Lay it down. Step.",
+   "pause": 0.9
+  },
+  {
+   "who": "narrator",
+   "text": "Again. And again.",
+   "pause": 0.45
+  },
+  {
+   "who": "walter",
+   "text": "My back.",
+   "pause": 0.45
+  },
+  {
+   "who": "narrator",
+   "text": "Until the sun moves.",
+   "pause": 0.5
+  }
+ ],
+ "23": [
+  {
+   "who": "narrator",
+   "text": "Joan binds the sheaves. Hugh chases crows and hauls water.",
+   "pause": 0.45
+  },
+  {
+   "who": "hugh",
+   "text": "Go on! Shoo!",
+   "pause": 0.45
+  },
+  {
+   "who": "narrator",
+   "text": "At nine, he's already a labourer.",
+   "pause": 0.5
+  }
+ ],
+ "24": [
+  {
+   "who": "narrator",
+   "text": "Every tenth sheaf is marked and left standing.",
+   "pause": 0.45
+  },
+  {
+   "who": "walter",
+   "text": "That one's not ours.",
+   "pause": 0.45
+  },
+  {
+   "who": "narrator",
+   "text": "It belongs to the Church.",
+   "pause": 0.5
+  }
+ ],
+ "25": [
+  {
+   "who": "narrator",
+   "text": "You've seen this field fail.",
+   "pause": 0.9
+  },
+  {
+   "who": "narrator",
+   "text": "Five years ago, it rained all summer.",
+   "pause": 0.9
+  },
+  {
+   "who": "narrator",
+   "text": "Seed rotted. Prices soared. People ate their seed corn, then their horses.",
+   "pause": 0.9
+  },
+  {
+   "who": "narrator",
+   "text": "Perhaps one in ten died.",
+   "pause": 2.2
+  },
+  {
+   "who": "narrator",
+   "text": "That winter, you buried a child.",
+   "pause": 0.5
+  }
+ ],
+ "26": [
+  {
+   "who": "narrator",
+   "text": "And now, a plague on the cattle. Oxen are dying across England.",
+   "pause": 0.45
+  },
+  {
+   "who": "walter",
+   "text": "Two beasts short. Two.",
+   "pause": 0.5
+  },
+  {
+   "who": "narrator",
+   "text": "Your plough team can't pull. And the lord's ploughing comes first.",
+   "pause": 0.5
+  }
+ ],
+ "27": [
+  {
+   "who": "narrator",
+   "text": "At noon, the lord feeds his reapers. Bread. Cheese. Maybe herring.",
+   "pause": 0.45
+  },
+  {
+   "who": "walter",
+   "text": "Is there ale?",
+   "pause": 0.45
+  },
+  {
+   "who": "john",
+   "text": "On a wet boon, there's ale.",
+   "pause": 0.45
+  },
+  {
+   "who": "walter",
+   "text": "And today?",
+   "pause": 0.45
+  },
+  {
+   "who": "john",
+   "text": "Today is a dry boon.",
+   "pause": 0.45
+  }
+ ],
+ "28": [
+  {
+   "who": "villagerB",
+   "text": "Agh! My hand!",
+   "pause": 0.45
+  },
+  {
+   "who": "narrator",
+   "text": "A sickle slips.",
+   "pause": 0.45
+  },
+  {
+   "who": "walter",
+   "text": "Hold still. Hold still.",
+   "pause": 0.45
+  },
+  {
+   "who": "narrator",
+   "text": "No doctor. Just linen and prayer. The coroners' rolls are full of this.",
+   "pause": 0.5
+  }
+ ],
+ "29": [
+  {
+   "who": "narrator",
+   "text": "By mid-afternoon, a dark line of cloud.",
+   "pause": 0.45
+  },
+  {
+   "who": "walter",
+   "text": "No. Not today.",
+   "pause": 0.5
+  },
+  {
+   "who": "narrator",
+   "text": "Your own wheat stands ripe, on the far side of the field.",
+   "pause": 0.5
+  }
+ ],
+ "30": [
+  {
+   "who": "narrator",
+   "text": "A bush on a pole means Matilda has brewed.",
+   "pause": 0.45
+  },
+  {
+   "who": "matilda",
+   "text": "Fresh brewed! Come and get it!",
+   "pause": 0.45
+  },
+  {
+   "who": "narrator",
+   "text": "Ale sours in days, so women brew constantly.",
+   "pause": 0.45
+  },
+  {
+   "who": "taster",
+   "text": "Hm. Thin. That's a fine.",
+   "pause": 0.45
+  },
+  {
+   "who": "matilda",
+   "text": "Thin?!",
+   "pause": 0.45
+  },
+  {
+   "who": "narrator",
+   "text": "The ale-tasters fine anything thin, or overpriced.",
+   "pause": 0.5
+  }
+ ],
+ "31": [
+  {
+   "who": "narrator",
+   "text": "In church, the wall shows devils dragging sinners into a monster's mouth.",
+   "pause": 0.45
+  },
+  {
+   "who": "walter",
+   "text": "Oh.",
+   "pause": 0.6
+  },
+  {
+   "who": "narrator",
+   "text": "You can't read. You don't need to.",
+   "pause": 0.5
+  }
+ ],
+ "32": [
+  {
+   "who": "priest",
+   "text": "Ah, Walter. Don't forget the tithe.",
+   "pause": 0.45
+  },
+  {
+   "who": "narrator",
+   "text": "Your priest takes a tenth of your grain, your lambs, even your eggs.",
+   "pause": 0.45
+  },
+  {
+   "who": "walter",
+   "text": "Even the eggs?",
+   "pause": 0.45
+  },
+  {
+   "who": "priest",
+   "text": "Even the eggs.",
+   "pause": 0.45
+  }
+ ],
+ "33": [
+  {
+   "who": "joan",
+   "text": "Father, I want to marry him.",
+   "pause": 0.45
+  },
+  {
+   "who": "narrator",
+   "text": "First, you must pay the lord merchet: a fine for permission to marry.",
+   "pause": 0.45
+  },
+  {
+   "who": "walter",
+   "text": "How much?",
+   "pause": 0.45
+  },
+  {
+   "who": "gilbert",
+   "text": "More than you'd like.",
+   "pause": 0.5
+  },
+  {
+   "who": "narrator",
+   "text": "Some lords even fined unwed mothers.",
+   "pause": 0.5
+  }
+ ],
+ "34": [
+  {
+   "who": "narrator",
+   "text": "A hare bolts from the stubble.",
+   "pause": 0.45
+  },
+  {
+   "who": "walter",
+   "text": "Dinner!",
+   "pause": 0.45
+  },
+  {
+   "who": "narrator",
+   "text": "Catch it, and you'll be fined.",
+   "pause": 0.45
+  },
+  {
+   "who": "walter",
+   "text": "Not dinner.",
+   "pause": 0.45
+  },
+  {
+   "who": "narrator",
+   "text": "Game belongs to the lord.",
+   "pause": 0.5
+  }
+ ],
+ "35": [
+  {
+   "who": "narrator",
+   "text": "Even the king reaches this far.",
+   "pause": 0.9
+  },
+  {
+   "who": "narrator",
+   "text": "His tax men value your pots and animals.",
+   "pause": 0.45
+  },
+  {
+   "who": "purveyor",
+   "text": "That sack. For the king's army.",
+   "pause": 0.45
+  },
+  {
+   "who": "walter",
+   "text": "Will we be paid?",
+   "pause": 0.45
+  },
+  {
+   "who": "purveyor",
+   "text": "Eventually.",
+   "pause": 0.5
+  },
+  {
+   "who": "narrator",
+   "text": "His purveyors take grain for his wars, and pay late, or never.",
+   "pause": 0.5
+  }
+ ],
+ "36": [
+  {
+   "who": "pedlar",
+   "text": "News! The Scots are burning the north! And the king is feuding with his barons!",
+   "pause": 0.45
+  },
+  {
+   "who": "walter",
+   "text": "So, nothing about my pig.",
+   "pause": 0.5
+  },
+  {
+   "who": "narrator",
+   "text": "It all feels very far away.",
+   "pause": 0.5
+  }
+ ],
+ "37": [
+  {
+   "who": "narrator",
+   "text": "The real dangers here are ordinary. Open wells. Ditches. Cooking fires. Carts.",
+   "pause": 0.45
+  },
+  {
+   "who": "alice",
+   "text": "Agnes! No!",
+   "pause": 0.6
+  },
+  {
+   "who": "narrator",
+   "text": "Coroners recorded toddlers drowning while their parents worked the harvest.",
+   "pause": 0.5
+  }
+ ],
+ "38": [
+  {
+   "who": "narrator",
+   "text": "Yet you are not powerless.",
+   "pause": 0.9
+  },
+  {
+   "who": "narrator",
+   "text": "You own a seal.",
+   "pause": 0.45
+  },
+  {
+   "who": "walter",
+   "text": "My own mark.",
+   "pause": 0.45
+  },
+  {
+   "who": "narrator",
+   "text": "Peasants buy, sell and lease land, and the court records every deal.",
+   "pause": 0.5
+  }
+ ],
+ "39": [
+  {
+   "who": "narrator",
+   "text": "On the way home, you pass John Cok's house.",
+   "pause": 0.9
+  },
+  {
+   "who": "narrator",
+   "text": "His byre is empty. His cow is gone.",
+   "pause": 0.45
+  },
+  {
+   "who": "walter",
+   "text": "John?",
+   "pause": 1.44
+  },
+  {
+   "who": "narrator",
+   "text": "And John won't meet your eye.",
+   "pause": 0.5
+  }
+ ],
+ "40": [
+  {
+   "who": "narrator",
+   "text": "Three weeks ago, on a boon day, John reaped his own corn instead.",
+   "pause": 0.45
+  },
+  {
+   "who": "john",
+   "text": "My corn was rotting. What was I to do?",
+   "pause": 0.5
+  },
+  {
+   "who": "narrator",
+   "text": "A small act of defiance.",
+   "pause": 0.9
+  },
+  {
+   "who": "narrator",
+   "text": "This is what it cost.",
+   "pause": 0.5
+  }
+ ],
+ "41": [
+  {
+   "who": "narrator",
+   "text": "The court fined him. He couldn't pay.",
+   "pause": 0.45
+  },
+  {
+   "who": "lordsMan",
+   "text": "The cow comes with us.",
+   "pause": 0.5
+  },
+  {
+   "who": "narrator",
+   "text": "So the lord's men took his cow, until he pays.",
+   "pause": 0.5
+  }
+ ],
+ "42": [
+  {
+   "who": "narrator",
+   "text": "Tomorrow, your turn.",
+   "pause": 0.5
+  },
+  {
+   "who": "clerk",
+   "text": "Walter atte Brook. His pig, in the lord's barley.",
+   "pause": 0.45
+  },
+  {
+   "who": "steward",
+   "text": "Amerced.",
+   "pause": 0.45
+  },
+  {
+   "who": "walter",
+   "text": "But I didn't even see it!",
+   "pause": 0.5
+  },
+  {
+   "who": "narrator",
+   "text": "Your own neighbours sit as jurors. And you can't pay.",
+   "pause": 0.5
+  }
+ ],
+ "43": [
+  {
+   "who": "narrator",
+   "text": "If you fall sick, the work is still owed.",
+   "pause": 0.9
+  },
+  {
+   "who": "narrator",
+   "text": "Send a son. Hire a man. Or pay.",
+   "pause": 0.45
+  },
+  {
+   "who": "hugh",
+   "text": "I'll go, Father.",
+   "pause": 0.6
+  },
+  {
+   "who": "narrator",
+   "text": "And when you die, the lord takes your best beast. The priest, your second.",
+   "pause": 0.5
+  }
+ ],
+ "44": [
+  {
+   "who": "narrator",
+   "text": "You could run. Some do.",
+   "pause": 0.45
+  },
+  {
+   "who": "walter",
+   "text": "Just keep walking.",
+   "pause": 0.5
+  },
+  {
+   "who": "narrator",
+   "text": "But the court names you, and orders your family to bring you back.",
+   "pause": 0.9
+  },
+  {
+   "who": "narrator",
+   "text": "Survive a year and a day in a chartered town, and you might be free.",
+   "pause": 0.5
+  }
+ ],
+ "45": [
+  {
+   "who": "narrator",
+   "text": "And some villages fought back.",
+   "pause": 0.45
+  },
+  {
+   "who": "villagerE",
+   "text": "Our grandfathers were free men! It's in the Domesday Book!",
+   "pause": 0.45
+  },
+  {
+   "who": "narrator",
+   "text": "They searched for proof, refused services together, and sued their lords.",
+   "pause": 0.45
+  },
+  {
+   "who": "steward",
+   "text": "Back to work.",
+   "pause": 0.45
+  },
+  {
+   "who": "narrator",
+   "text": "They usually lost.",
+   "pause": 1.44
+  },
+  {
+   "who": "narrator",
+   "text": "But not always.",
+   "pause": 0.5
+  }
+ ],
+ "46": [
+  {
+   "who": "narrator",
+   "text": "Released at last, you run to your own strip.",
+   "pause": 0.45
+  },
+  {
+   "who": "walter",
+   "text": "Come on. Come on.",
+   "pause": 0.45
+  },
+  {
+   "who": "narrator",
+   "text": "You reap until you can't see your hands.",
+   "pause": 1.28
+  },
+  {
+   "who": "narrator",
+   "text": "Half of it is still standing.",
+   "pause": 0.5
+  }
+ ],
+ "47": [
+  {
+   "who": "narrator",
+   "text": "Next door, Emma lost her husband last winter. She kept his land.",
+   "pause": 0.45
+  },
+  {
+   "who": "steward",
+   "text": "Mistress Emma. Have you thought about remarrying?",
+   "pause": 0.45
+  },
+  {
+   "who": "emma",
+   "text": "Every day, sir. Every day you ask.",
+   "pause": 0.45
+  },
+  {
+   "who": "narrator",
+   "text": "But the steward keeps asking.",
+   "pause": 0.5
+  }
+ ],
+ "48": [
+  {
+   "who": "alice",
+   "text": "Walter. She's burning up.",
+   "pause": 0.6
+  },
+  {
+   "who": "narrator",
+   "text": "Hot to the touch. And no physician comes to a villein's cottage.",
+   "pause": 0.9
+  },
+  {
+   "who": "narrator",
+   "text": "Alice tries a herb. A charm. A saint's name.",
+   "pause": 0.5
+  }
+ ],
+ "49": [
+  {
+   "who": "narrator",
+   "text": "Before dark, Hugh pens your sheep on the lord's land.",
+   "pause": 0.45
+  },
+  {
+   "who": "hugh",
+   "text": "Why there, Father?",
+   "pause": 0.45
+  },
+  {
+   "who": "walter",
+   "text": "Because their dung manures his fields. Not ours.",
+   "pause": 0.45
+  }
+ ],
+ "50": [
+  {
+   "who": "narrator",
+   "text": "Supper is pottage. Peas, beans, leeks and oats, stewed for hours.",
+   "pause": 0.45
+  },
+  {
+   "who": "agnes",
+   "text": "Pottage again?",
+   "pause": 0.45
+  },
+  {
+   "who": "alice",
+   "text": "Pottage again.",
+   "pause": 0.45
+  },
+  {
+   "who": "narrator",
+   "text": "Bacon, if you're lucky.",
+   "pause": 0.9
+  },
+  {
+   "who": "narrator",
+   "text": "No potatoes. No tomatoes. Not for centuries.",
+   "pause": 0.5
+  }
+ ],
+ "51": [
+  {
+   "who": "narrator",
+   "text": "Alice spins wool by firelight, one eye on the cradle.",
+   "pause": 0.9
+  },
+  {
+   "who": "narrator",
+   "text": "Her hands haven't stopped since before dawn.",
+   "pause": 0.5
+  }
+ ],
+ "52": [
+  {
+   "who": "walter",
+   "text": "Pater Noster, qui es in caelis.",
+   "pause": 0.6
+  },
+  {
+   "who": "narrator",
+   "text": "You pray in Latin.",
+   "pause": 0.9
+  },
+  {
+   "who": "narrator",
+   "text": "Words you can't fully translate, for a child you can't heal.",
+   "pause": 0.5
+  }
+ ],
+ "53": [
+  {
+   "who": "narrator",
+   "text": "Then, rain on the thatch.",
+   "pause": 0.45
+  },
+  {
+   "who": "walter",
+   "text": "No. No, no, no.",
+   "pause": 0.5
+  },
+  {
+   "who": "narrator",
+   "text": "Your wheat is still in the field. Nothing to do but wait for dawn.",
+   "pause": 0.5
+  }
+ ],
+ "54": [
+  {
+   "who": "narrator",
+   "text": "Alice banks the fire under ash.",
+   "pause": 0.45
+  },
+  {
+   "who": "alice",
+   "text": "Walter. She's cooler.",
+   "pause": 0.5
+  },
+  {
+   "who": "narrator",
+   "text": "The fever has broken.",
+   "pause": 1.44
+  },
+  {
+   "who": "narrator",
+   "text": "For tonight.",
+   "pause": 0.5
+  }
+ ],
+ "55": [
+  {
+   "who": "narrator",
+   "text": "Twenty-eight years from tonight, a plague will kill perhaps half of England.",
+   "pause": 0.9
+  },
+  {
+   "who": "narrator",
+   "text": "Labour will become precious. And men like you will start to say no.",
+   "pause": 0.45
+  },
+  {
+   "who": "villagerA",
+   "text": "We are not your beasts!",
+   "pause": 0.5
+  },
+  {
+   "who": "narrator",
+   "text": "Serfdom will die slowly.",
+   "pause": 1.28
+  },
+  {
+   "who": "narrator",
+   "text": "But it will die.",
+   "pause": 0.5
+  }
+ ],
+ "56": [
+  {
+   "who": "narrator",
+   "text": "You'll leave no portrait. No letter. Maybe one line in a court roll.",
+   "pause": 0.9
+  },
+  {
+   "who": "narrator",
+   "text": "But walk across an English field today, and look closely.",
+   "pause": 0.9
+  },
+  {
+   "who": "narrator",
+   "text": "The ridges and furrows you ploughed are still there.",
+   "pause": 2.2
+  },
+  {
+   "who": "narrator",
+   "text": "So, could you have survived one day as Walter?",
+   "pause": 0.9
+  },
+  {
+   "who": "narrator",
+   "text": "Tell us in the comments.",
+   "pause": 0.5
+  }
+ ]
+}

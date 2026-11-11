@@ -22,6 +22,8 @@ import { actionPose } from "./actions";
 import { CAST } from "./cast";
 import { faceAt } from "./expressions";
 import { Overlays, Rain } from "./overlays";
+import { NARRATION, mouthAt } from "../narration";
+import { useMemo } from "react";
 import { Animal, Dressing } from "./props3d";
 import type { ActorSpec, SceneSpec, SetId, ShotSpec, ShotType } from "./spec";
 
@@ -35,6 +37,7 @@ const TPL: Record<ShotType, Tpl> = {
   high: { d: 5.2, h: 4.2, l: 0.8, lead: 0.06, fov: 44, bokeh: 2, range: 4.5, ty: -0.7 },
   low: { d: 2.3, h: -0.6, l: 0.55, lead: 0.15, fov: 46, bokeh: 3.5, range: 1.1, ty: 0.15 },
   group: { d: 4.2, h: 0.5, l: 0.6, lead: 0, fov: 42, bokeh: 2.5, range: 2.5, ty: -0.35 },
+  ots: { d: 1.7, h: 0.1, l: 0.85, lead: 0, fov: 38, bokeh: 6, range: 0.5, ty: -0.05 },
 };
 
 const BOUNDS: Partial<Record<SetId, [Vec3, Vec3]>> = {
@@ -54,12 +57,22 @@ const autoShots = (seconds: number): ShotSpec[] => {
 // ---- actors -------------------------------------------------------------------------
 type ActorState = { spec: ActorSpec; pose: StickmanPose; pos: Vec3; face: 1 | -1; visible: boolean };
 
+/** Does this actor speak lines written for `who`? (Walter in his hood is still Walter.) */
+export const speaks = (actorWho: string, lineWho: string) => actorWho === lineWho || (actorWho === "walterHooded" && lineWho === "walter");
+
 const actorStates = (spec: SceneSpec, frame: number, fps: number, duration: number): ActorState[] =>
   spec.actors.map((a, i) => {
     const seed = a.seed ?? i * 3 + spec.n;
     const { body, pelvis } = actionPose(a.act, frame, seed);
     const face = faceAt(a.expr ?? "neutral", frame, duration, seed + 7, a.look ?? 0);
-    const pose: StickmanPose = { ...body, face, headTurn: a.turn ?? 0.5 };
+    // lip-sync: the mouth follows this character's own voice
+    const speech = mouthAt(NARRATION[spec.n], a.who === "walterHooded" ? "walter" : a.who, frame, fps);
+    if (speech > 0) {
+      face.mouthOpen = Math.max(face.mouthOpen, speech * 0.8);
+      face.browRaiseL += speech * 0.15;
+      face.browRaiseR += speech * 0.15;
+    }
+    const pose: StickmanPose = { ...body, face, headTurn: a.turn ?? 0.5, head: body.head + speech * 3 };
     const tMove = Math.max(0, frame / fps - (a.moveFrom ?? 0));
     const x = a.x + (a.vx ?? 0) * tMove;
     const scale = CAST[a.who].scale;
@@ -82,14 +95,75 @@ const clampTo = (p: Vec3, set: SetId): Vec3 => {
 
 type Cam = { position: Vec3; target: Vec3; fov: number; bokeh: number; range: number; focus: Vec3 };
 
-const cameraFor = (spec: SceneSpec, actors: ActorState[], frame: number, duration: number, fps: number): Cam => {
-  const shots = spec.shots ?? autoShots(duration / fps);
-  const f = frame / duration;
+/** One shot in the edit: frames [start, end). `listener` is the foreground head for over-the-shoulder shots. */
+export type PlannedShot = { start: number; end: number; shot: ShotSpec; listener?: number; dialogue?: boolean };
+
+const visibleAt = (a: ActorSpec, f: number) => !a.show || (f >= a.show[0] && f < a.show[1]);
+
+/**
+ * The edit for a scene: the scene's base shots, with a cut to whoever is
+ * speaking on each line of dialogue (shot-reverse-shot between two speakers,
+ * over the listener's shoulder when someone is listening).
+ */
+export const shotPlan = (spec: SceneSpec, duration: number, fps: number): PlannedShot[] => {
+  const base = spec.shots ?? autoShots(duration / fps);
+  const segs: PlannedShot[] = base.map((sh, i) => ({ start: Math.round(sh.at * duration), end: Math.round((base[i + 1]?.at ?? 1) * duration), shot: sh }));
+  const lines = NARRATION[spec.n]?.lines ?? [];
+  const windows: PlannedShot[] = [];
+  let k = 0;
+  for (const line of lines) {
+    if (line.who === "narrator") continue;
+    const mid = (line.start + line.end) / 2 / (duration / fps);
+    const speaker = spec.actors.findIndex((a) => speaks(a.who, line.who) && visibleAt(a, mid));
+    if (speaker < 0) continue;
+    const sp = spec.actors[speaker];
+    // the nearest other visible actor listens
+    let listener: number | undefined;
+    let best = 1e9;
+    spec.actors.forEach((a, j) => {
+      if (j === speaker || !visibleAt(a, mid)) return;
+      const d = Math.hypot(a.x - sp.x, a.z - sp.z);
+      if (d < best && d < 4.5) {
+        best = d;
+        listener = j;
+      }
+    });
+    const type: ShotType = listener !== undefined && k % 2 === 1 ? "ots" : listener !== undefined ? "close" : k % 2 ? "close" : "medium";
+    windows.push({ start: Math.max(0, Math.round((line.start - 0.15) * fps)), end: Math.min(duration, Math.round((line.end + 0.35) * fps)), shot: { type, at: 0, on: speaker }, listener, dialogue: true });
+    k++;
+  }
+  // overlay dialogue windows on the base edit
+  let out: PlannedShot[] = segs;
+  for (const w of windows) {
+    const next: PlannedShot[] = [];
+    for (const s of out) {
+      if (s.end <= w.start || s.start >= w.end) next.push(s);
+      else {
+        if (s.start < w.start) next.push({ ...s, end: w.start });
+        if (s.end > w.end) next.push({ ...s, start: w.end });
+      }
+    }
+    next.push(w);
+    out = next.sort((x, y) => x.start - y.start);
+  }
+  // absorb fragments shorter than 0.6 s into their neighbour
+  const min = Math.round(0.6 * fps);
+  const merged: PlannedShot[] = [];
+  for (const s of out) {
+    const prev = merged[merged.length - 1];
+    if (prev && s.end - s.start < min) prev.end = s.end;
+    else if (prev && prev.end - prev.start < min && !prev.dialogue) merged[merged.length - 1] = { ...s, start: prev.start };
+    else merged.push({ ...s });
+  }
+  return merged;
+};
+
+const cameraFor = (spec: SceneSpec, actors: ActorState[], frame: number, plan: PlannedShot[]): Cam => {
   let i = 0;
-  for (let k = 0; k < shots.length; k++) if (f >= shots[k].at) i = k;
-  const shot = shots[i];
-  const end = shots[i + 1]?.at ?? 1;
-  const t = progress(f, shot.at, end, ease.inOut);
+  for (let k = 0; k < plan.length; k++) if (frame >= plan[k].start) i = k;
+  const seg = plan[i];
+  const shot = seg.shot;
+  const t = progress(frame, seg.start, seg.end, ease.inOut);
   const tpl = { ...TPL[shot.type] };
   const subject = actors[shot.on ?? spec.focus ?? 0] ?? actors[0];
   let H = subject ? headOf(subject) : ([0, 1.4, 0] as Vec3);
@@ -102,12 +176,25 @@ const cameraFor = (spec: SceneSpec, actors: ActorState[], frame: number, duratio
     tpl.fov = spread > 6 ? 48 : tpl.fov;
   }
   const face = subject?.face ?? 1;
-  const rnd = seededRandom(spec.n * 31 + i * 7);
-  const side = shot.side ?? (rnd() > 0.5 ? 1 : -1) * face;
   const focus = H;
   if (shot.pos && shot.target) {
     return { position: shot.pos, target: shot.target, fov: shot.fov ?? tpl.fov, bokeh: tpl.bokeh, range: tpl.range, focus };
   }
+  if (shot.type === "ots" && seg.listener !== undefined && actors[seg.listener]) {
+    // behind the listener's shoulder: their head big and soft in the foreground, the speaker sharp
+    const L = headOf(actors[seg.listener]);
+    const dir = Math.sign(H[0] - L[0]) || 1;
+    const want: Vec3 = [L[0] - dir * tpl.l, L[1] + tpl.h, L[2] + tpl.d - 0.06 * t];
+    const pos = clampTo(want, spec.set);
+    // a wall in the way would jam the lens into the listener's head: fall back to a clean close-up
+    if (Math.hypot(pos[0] - want[0], pos[2] - want[2]) < 0.25) {
+      const target: Vec3 = [H[0] - dir * 0.15, H[1] + tpl.ty, H[2]];
+      return { position: pos, target, fov: tpl.fov, bokeh: tpl.bokeh, range: tpl.range, focus };
+    }
+    Object.assign(tpl, TPL.close);
+  }
+  const rnd = seededRandom(spec.n * 31 + i * 7);
+  const side = shot.side ?? (rnd() > 0.5 ? 1 : -1) * face;
   const start: Vec3 = [H[0] + side * tpl.l, H[1] + tpl.h, H[2] + tpl.d];
   const target: Vec3 = [H[0] + face * tpl.lead * tpl.d, H[1] + tpl.ty, H[2]];
   // slow push in (or drift for wide shots)
@@ -168,11 +255,11 @@ const SetView: React.FC<{ spec: SceneSpec; frame: number; center: Vec3 }> = ({ s
   }
 };
 
-const World: React.FC<{ spec: SceneSpec; duration: number }> = ({ spec, duration }) => {
+const World: React.FC<{ spec: SceneSpec; duration: number; plan: PlannedShot[] }> = ({ spec, duration, plan }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const actors = actorStates(spec, frame, fps, duration);
-  const cam = cameraFor(spec, actors, frame, duration, fps);
+  const cam = cameraFor(spec, actors, frame, plan);
   const { light, rim, tint } = castLight(spec);
   return (
     <>
@@ -234,6 +321,10 @@ export const GenericScene: React.FC<{ spec: SceneSpec; durationInFrames: number 
   const frame = useCurrentFrame();
   const { width, height, fps } = useVideoConfig();
   const ambience = spec.ambience ?? (spec.set === "cottage" ? "fire" : spec.rain ? "rain" : spec.set === "village" || spec.set === "fields" || spec.set === "pasture" ? "wind" : "none");
+  const plan = useMemo(() => shotPlan(spec, durationInFrames, fps), [spec, durationInFrames, fps]);
+  // sound accents: a whoosh on roughly a third of the cuts, a blip when a graphic lands
+  const whooshes = plan.slice(1).filter((_, i) => i % 3 === 0).map((p) => p.start);
+  const blips = (spec.overlays ?? []).map((o) => Math.round(o.from * fps));
   const fadeIn = spec.fadeIn ?? 0;
   const fadeOut = spec.fadeOut ?? 0;
   const black = Math.max(
@@ -244,7 +335,7 @@ export const GenericScene: React.FC<{ spec: SceneSpec; durationInFrames: number 
     <AbsoluteFill style={{ backgroundColor: "#000" }}>
       <AbsoluteFill style={{ filter: GRADE[spec.grade ?? "none"] }}>
         <ThreeCanvas width={width} height={height} shadows="soft" dpr={1} gl={{ antialias: false, powerPreference: "high-performance" }} camera={{ fov: 40, near: 0.05, far: 400, position: [0, 1.5, 6] }}>
-          <World spec={spec} duration={durationInFrames} />
+          <World spec={spec} duration={durationInFrames} plan={plan} />
         </ThreeCanvas>
       </AbsoluteFill>
       {spec.rain ? <Rain /> : null}
@@ -258,6 +349,16 @@ export const GenericScene: React.FC<{ spec: SceneSpec; durationInFrames: number 
           <Audio src={staticFile(`audio/sfx/${ambience}.mp3`)} volume={AMBIENCE_VOL[ambience]} />
         </Loop>
       ) : null}
+      {whooshes.map((f) => (
+        <Sequence key={`w${f}`} from={Math.max(0, f - 6)} durationInFrames={30} layout="none">
+          <Audio src={staticFile("audio/sfx/whoosh.mp3")} volume={0.32} />
+        </Sequence>
+      ))}
+      {blips.map((f, i) => (
+        <Sequence key={`b${i}`} from={f} durationInFrames={15} layout="none">
+          <Audio src={staticFile("audio/sfx/blip.mp3")} volume={0.35} />
+        </Sequence>
+      ))}
       {(spec.sfx ?? []).map((s, i) => (
         <Sequence key={i} from={Math.round(s.at * fps)} durationInFrames={Math.round(4 * fps)} layout="none">
           <Audio src={staticFile(`audio/sfx/${s.id}.mp3`)} volume={0.8} />

@@ -45,7 +45,7 @@ export const SECTION_5_6: SceneSpec[] = [
     set: "hall",
     grade: "vision",
     actors: [
-      A("walter", 0.2, -4.2, "stand", { turn: 0.15, expr: [[0, "worried"], [0.6, "scared"]] }),
+      A("walter", 0.2, -4.2, "stand", { turn: 0.15, expr: [[0, "nervous"], [0.45, "shocked"], [0.6, "scared"]] }),
       A("steward", -0.6, -8.6, "sit", { y: 0.3, expr: "stern" }),
       A("clerk", 1.0, -8.6, "sit", { y: 0.3, prop: "tally", expr: "neutral", seed: 4 }),
       A("villagerA", -3.5, -4.6, "sit", { y: 0, seed: 2, expr: "stern" }),
@@ -54,7 +54,7 @@ export const SECTION_5_6: SceneSpec[] = [
     ],
     shots: [{ type: "wide", at: 0, on: 1 }, { type: "medium", at: 0.36, on: 1 }, { type: "close", at: 0.68, on: 0 }],
     overlays: [
-      { kind: "title", text: "THE MANOR COURT", from: 0.4, to: sec(42, "The", 2) },
+      { kind: "title", text: "THE MANOR COURT", from: 0.4, to: sec(42, "Walter") },
       { kind: "roll", lines: ["Walterus atte Broke…", "porcus in blado domini", "— amerciatur —"], caption: "FINED ON THE ROLL", from: sec(42, "pig"), to: dur(42) - 0.3 },
     ],
     ambience: "fire",
@@ -73,7 +73,7 @@ export const SECTION_5_6: SceneSpec[] = [
     ],
     shots: [{ type: "high", at: 0 }, { type: "medium", at: 0.3, on: 1 }, { type: "wide", at: 0.55 }],
     overlays: [
-      { kind: "list", items: ["SEND A SON", "HIRE A MAN", "OR PAY"], from: sec(43, "you", 2), to: sec(43, "And") },
+      { kind: "list", items: ["SEND A SON", "HIRE A MAN", "OR PAY"], from: sec(43, "Send"), to: sec(43, "And") },
       { kind: "label", text: "BEST BEAST → THE LORD   ·   SECOND BEST → THE PRIEST", where: "top", from: sec(43, "lord"), to: dur(43) - 0.3 },
       { kind: "title", text: "HERIOT & MORTUARY", from: sec(43, "And"), to: sec(43, "lord") - 0.1 },
     ],
@@ -114,8 +114,8 @@ export const SECTION_5_6: SceneSpec[] = [
     shots: [{ type: "group", at: 0 }, { type: "close", at: 0.38, on: 0 }, { type: "medium", at: 0.62, on: 5 }, { type: "group", at: 0.84 }],
     overlays: [
       { kind: "roll", lines: ["Domesday Book, 1086:", "…liberi homines…", "— were we once free? —"], caption: "SEARCHING DOMESDAY", from: sec(45, "They"), to: sec(45, "refused") },
-      { kind: "label", text: "REFUSING SERVICES TOGETHER", where: "top", from: sec(45, "refused"), to: sec(45, "took") },
-      { kind: "label", text: "TO THE KING'S COURTS", where: "top", from: sec(45, "took"), to: sec(45, "usually") },
+      { kind: "label", text: "REFUSING SERVICES TOGETHER", where: "top", from: sec(45, "refused"), to: sec(45, "sued") },
+      { kind: "label", text: "TO THE KING'S COURTS", where: "top", from: sec(45, "sued"), to: sec(45, "usually") },
       { kind: "title", text: "USUALLY THEY LOST. NOT ALWAYS.", from: sec(45, "usually"), to: dur(45) - 0.3 },
     ],
   },
@@ -138,7 +138,7 @@ export const SECTION_5_6: SceneSpec[] = [
     set: "village",
     time: "dusk",
     actors: [
-      A("emma", 3, 0.6, "walk", { face: -1, vx: -0.55, prop: "sack", expr: "determined" }),
+      A("emma", 3, 0.6, "walk", { face: -1, vx: -0.55, prop: "sack", expr: [[0, "determined"], [0.55, "angry"], [0.75, "determined"]] }),
       A("steward", 7.2, -0.4, "point", { face: -1, expr: "stern" }),
       A("walter", -3.2, 1.0, "stand", { prop: "sickle", expr: "sad" }),
     ],
@@ -152,7 +152,7 @@ export const SECTION_5_6: SceneSpec[] = [
     sun: 0.05,
     ember: 1,
     actors: [
-      A("alice", 0.4, 0.55, "hold", { prop: "baby", expr: [[0, "scared"], [0.55, "worried"]], look: 0.3 }),
+      A("alice", 0.4, 0.55, "hold", { prop: "baby", expr: [[0, "scared"], [0.45, "cry"]], look: 0.3 }),
       A("walter", 1.45, 0.5, "reach", { face: -1, expr: "worried" }),
     ],
     shots: [{ type: "medium", at: 0, on: 0 }, { type: "close", at: 0.42, on: 0 }, { type: "close", at: 0.72, on: 1 }],
@@ -234,7 +234,7 @@ export const SECTION_5_6: SceneSpec[] = [
     ambience: "rain",
     actors: [
       A("walter", 0.9, 1.0, "walk", { vx: 0.45, expr: "worried", show: [0, 0.4] }),
-      A("walter", 1.9, 1.0, "stand", { expr: [[0, "worried"], [0.7, "sad"]], show: [0.4, 1] }),
+      A("walter", 1.9, 1.0, "stand", { expr: [[0, "gasp"], [0.35, "worried"], [0.7, "cry"]], show: [0.4, 1] }),
       A("alice", 1.0, 1.15, "stand", { expr: "sad", show: [0.62, 1] }),
     ],
     shots: [{ type: "medium", at: 0 }, { type: "close", at: 0.5, on: 1 }, { type: "medium", at: 0.75, on: 1, side: -1 }],
@@ -289,7 +289,8 @@ export const SECTION_5_6: SceneSpec[] = [
     ],
     overlays: [
       { kind: "label", text: "MEDIEVAL RIDGE AND FURROW · STILL VISIBLE TODAY", where: "top", from: sec(56, "But"), to: sec(56, "The", 1) + 1.5 },
-      { kind: "title", text: "THE DUST OF THE FURROW", y: 0.45, from: dur(56) - 6, to: dur(56) - 0.6 },
+      { kind: "title", text: "COULD YOU HAVE SURVIVED ONE DAY?", y: 0.42, from: sec(56, "could"), to: dur(56) - 2.6 },
+      { kind: "title", text: "THE DUST OF THE FURROW", y: 0.45, from: dur(56) - 2.5, to: dur(56) - 0.3 },
     ],
     fadeOut: 30,
   },

@@ -35,8 +35,8 @@ export const SECTION_3_4: SceneSpec[] = [
     ],
     shots: [{ type: "wide", at: 0 }, { type: "medium", at: 0.42 }, { type: "close", at: 0.72, side: 1 }],
     overlays: [
-      { kind: "title", text: "BOON DAY", from: 0.4, to: sec(21, "Every") },
-      { kind: "label", text: "THE LORD'S HARVEST FIRST", where: "top", from: sec(21, "Every"), to: dur(21) - 0.3 },
+      { kind: "title", text: "BOON DAY", from: 0.4, to: sec(21, "Everyone") },
+      { kind: "label", text: "THE LORD'S HARVEST FIRST", where: "top", from: sec(21, "Everyone"), to: dur(21) - 0.3 },
     ],
   },
   // 22 · The Rhythm of the Sickle
@@ -82,7 +82,7 @@ export const SECTION_3_4: SceneSpec[] = [
     fields: { demesneDone: true },
     actors: [
       A("walter", -4, 3, "stand", { prop: "sheaf", expr: [[0, "sad"], [0.5, "scared"]], show: [0, 0.72] }),
-      A("walter", -4, 3, "pray", { expr: "sad", show: [0.72, 1] }),
+      A("walter", -4, 3, "pray", { expr: "cry", show: [0.72, 1] }),
     ],
     shots: [{ type: "wide", at: 0 }, { type: "medium", at: 0.34 }, { type: "close", at: 0.58 }, { type: "medium", at: 0.74, on: 1, side: -1 }],
     overlays: [
@@ -115,7 +115,7 @@ export const SECTION_3_4: SceneSpec[] = [
       A("john", -10.7, 7, "eat", { face: -1, seed: 5 }),
       A("villagerB", -9.4, 7, "eat", { face: -1, seed: 8, expr: "tired" }),
     ],
-    dressing: [{ kind: "cart", x: -5, z: 8.5 }, { kind: "bench", x: -11.4, z: 7.05, scale: 2 }],
+    dressing: [{ kind: "cart", x: -5, z: 8.5 }],
     shots: [{ type: "group", at: 0 }, { type: "close", at: 0.62 }],
     overlays: [
       { kind: "list", items: ["BREAD", "CHEESE", "HERRING?"], from: 0.4, to: sec(27, "On") },
@@ -139,7 +139,7 @@ export const SECTION_3_4: SceneSpec[] = [
     n: 29,
     set: "fields",
     time: "storm",
-    actors: [A("walter", -12, 1.2, "reap", { prop: "sickle", expr: [[0, "worried"], [0.65, "scared"]] }), ...reapers([-16, -8])],
+    actors: [A("walter", -12, 1.2, "reap", { prop: "sickle", expr: [[0, "worried"], [0.4, "gasp"], [0.65, "scared"]] }), ...reapers([-16, -8])],
     shots: [
       { type: "medium", at: 0 },
       { type: "wide", at: 0.38, pos: [-10, 2.6, 10], target: [18, 6, -60], fov: 46 },
@@ -156,7 +156,7 @@ export const SECTION_3_4: SceneSpec[] = [
     set: "village",
     time: "afternoon",
     actors: [
-      A("matilda", 11.4, -4.5, "akimbo", { expr: [[0, "proud"], [0.68, "angry"]] }),
+      A("matilda", 11.4, -4.5, "akimbo", { expr: [[0, "happy"], [0.62, "shocked"], [0.72, "angry"]] }),
       A("taster", 13.2, -4.3, "drink", { face: -1, prop: "cup", expr: [[0, "neutral"], [0.6, "grimace"]] }),
     ],
     shots: [{ type: "wide", at: 0 }, { type: "medium", at: 0.42, on: 1 }, { type: "close", at: 0.72, on: 0 }],
@@ -169,7 +169,7 @@ export const SECTION_3_4: SceneSpec[] = [
   {
     n: 31,
     set: "church",
-    actors: [A("walter", 0.3, -9, "stand", { turn: 0.2, look: 0.2, expr: [[0, "neutral"], [0.3, "shocked"], [0.7, "scared"]] })],
+    actors: [A("walter", 0.3, -9, "stand", { turn: 0.2, look: 0.2, expr: [[0, "neutral"], [0.3, "gasp"], [0.7, "scared"]] })],
     shots: [
       { type: "medium", at: 0 },
       { type: "wide", at: 0.3, pos: [1.2, 1.6, -6.2], target: [0, 4.9, -18.9], fov: 42 },
@@ -211,7 +211,7 @@ export const SECTION_3_4: SceneSpec[] = [
     set: "fields",
     time: "afternoon",
     actors: [
-      A("walter", -9, 4, "crouch", { prop: "sickle", expr: "shocked", show: [0, 0.45] }),
+      A("walter", -9, 4, "crouch", { prop: "sickle", expr: "happy", show: [0, 0.45] }),
       A("walter", -9, 4, "stand", { prop: "sickle", expr: "sad", show: [0.45, 1] }),
     ],
     animals: [{ kind: "hare", x: -12, z: 3.4, vx: 2.6 }],
@@ -243,7 +243,7 @@ export const SECTION_3_4: SceneSpec[] = [
     set: "village",
     time: "afternoon",
     actors: [
-      A("pedlar", 0, -0.3, "gesture", { expr: "shout" }),
+      A("pedlar", 0, -0.3, "gesture", { expr: [[0, "shout"], [0.5, "shocked"]] }),
       A("villagerC", -1.8, -0.4, "stand", { expr: "shocked", look: 0.5 }),
       A("villagerD", 1.7, -0.6, "stand", { face: -1, expr: "worried" }),
       A("walter", 3.6, 0.7, "shrug", { face: -1, prop: "sickle", expr: [[0, "neutral"], [0.75, "worried"]] }),
@@ -285,7 +285,7 @@ export const SECTION_3_4: SceneSpec[] = [
     set: "village",
     time: "dusk",
     actors: [
-      A("john", -2.4, -5.3, "sitDespair", { expr: "sad", turn: -0.2 }),
+      A("john", -2.4, -5.3, "sitDespair", { expr: "cry", turn: -0.2 }),
       A("walter", -9, -3.8, "walk", { vx: 0.9, prop: "sickle", expr: "tired", show: [0, 0.42] }),
       A("walter", -5.2, -3.8, "stand", { prop: "sickle", expr: [[0, "confused"], [0.7, "worried"]], show: [0.42, 1] }),
     ],
