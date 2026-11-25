@@ -8,6 +8,7 @@ import { AnyScene, Documentary, makeScenePreview } from "./film/Documentary";
 import { FILM_DURATION, FILM_FPS, FILM_SCENES } from "./film/scenes";
 import { SCENE2_DURATION, SCENE2_FPS } from "./scenes/scene2/timeline";
 import { PoseSheet } from "./shorts/airpocket/PoseSheet";
+import { ThumbAirPocket, ThumbJuliane } from "./shorts/Thumbnails";
 import { CastSheet } from "./shorts/juliane/CastSheet";
 import { JULIANE_DURATION, JULIANE_FPS, Juliane } from "./shorts/juliane/Juliane";
 import { AIRPOCKET_DURATION, AIRPOCKET_FPS, AirPocket } from "./shorts/airpocket/AirPocket";
@@ -97,12 +98,14 @@ export const RemotionRoot: React.FC = () => {
         {/* The short: 1080x1920 vertical, voice + captions + sound */}
         <Composition id="AirPocket" component={AirPocket} durationInFrames={AIRPOCKET_DURATION} fps={AIRPOCKET_FPS} width={1080} height={1920} defaultProps={{ captions: true, audio: true }} />
         <Composition id="AirPocket-540p" component={AirPocket} durationInFrames={AIRPOCKET_DURATION} fps={AIRPOCKET_FPS} width={540} height={960} defaultProps={{ captions: true, audio: true }} />
+        <Composition id="AirPocket-Thumbnail" component={ThumbAirPocket} durationInFrames={1} fps={30} width={1080} height={1920} />
         <Composition id="Harrison-PoseSheet" component={PoseSheet} durationInFrames={1} fps={30} width={2400} height={1500} />
       </Folder>
       <Folder name="Juliane">
         {/* "The Girl Who Fell From the Sky": 1080x1920 vertical, voice + captions + sound */}
         <Composition id="Juliane" component={Juliane} durationInFrames={JULIANE_DURATION} fps={JULIANE_FPS} width={1080} height={1920} defaultProps={{ captions: true, audio: true }} />
         <Composition id="Juliane-540p" component={Juliane} durationInFrames={JULIANE_DURATION} fps={JULIANE_FPS} width={540} height={960} defaultProps={{ captions: true, audio: true }} />
+        <Composition id="Juliane-Thumbnail" component={ThumbJuliane} durationInFrames={1} fps={30} width={1080} height={1920} />
         <Composition id="Juliane-CastSheet" component={CastSheet} durationInFrames={1} fps={30} width={2400} height={1500} />
       </Folder>
       <Folder name="Dev">
