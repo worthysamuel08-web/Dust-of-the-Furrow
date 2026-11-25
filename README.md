@@ -1,5 +1,21 @@
 # Video Studio — Three.js + Remotion
 
+## Short: "The Girl Who Fell From the Sky" — Juliane Koepcke (vertical, 60 s)
+
+Juliane Koepcke, 17, sole survivor of LANSA Flight 508 (Christmas Eve 1971): she fell about 3 km strapped to her
+row of seats and walked out of the Amazon after 11 days by following water downstream, as her father taught her.
+Desire-hook structure (stakes → question → head fake → re-hook → payoff → loop): the opening frame shows the fall with
+"SHE FELL **3 KM** / AND LIVED." on screen, and the last frame fades back into it so the Short loops.
+
+```bash
+npm run render:juliane          # 1080x1920 → out/the-girl-who-fell-from-the-sky.mp4
+npm run audio:juliane           # rebuild voice, word timings, music + SFX (script lives in scripts/build-juliane-audio.py)
+```
+Studio: **Juliane → Juliane**; **Juliane-CastSheet** shows Juliane, her mother, her father and the two local men.
+Code: `src/shorts/juliane/` (`beats.tsx` scenes, `props.tsx` plane/seat row/jungle/hut, `cast.ts` looks) and the
+shared player `src/shorts/common/ShortPlayer.tsx` (beat sequencing + word-by-word captions) for future shorts.
+The stickman rig (`src/shorts/airpocket/Harrison.tsx`) now takes a `look` (hair, beard, glasses, hat, dress, sandal) and leg IK (`footL`/`footR`).
+
 ## Short: "Air Pocket" — Harrison's three days under the sea (vertical, 63 s)
 
 A YouTube-Shorts-style explainer (1080x1920, 30 fps) about Harrison Okene, the ship's cook who survived

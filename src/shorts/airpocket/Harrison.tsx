@@ -19,7 +19,31 @@ export const HAIR = "#141414";
 export type Expression = "neutral" | "smile" | "scared" | "shock" | "calm" | "cold" | "tired" | "determined" | "relief" | "no";
 export type Pt = { x: number; y: number };
 
+/** Who is drawn: the same stickman style, different hair/clothes. Defaults = Harrison. */
+export type Look = {
+  hair?: "tufts" | "long" | "bun" | "short" | "none";
+  hairColor?: string;
+  beard?: boolean;
+  glasses?: boolean;
+  lashes?: boolean;
+  hat?: "none" | "bush" | "straw";
+  outfit?: "tee" | "dress";
+  shirt?: string;
+  shorts?: string;
+  dress?: string;
+  feet?: "bare" | "oneSandal" | "shoes";
+};
+export const HARRISON_LOOK: Required<Look> = {
+  hair: "tufts", hairColor: HAIR, beard: true, glasses: false, lashes: false, hat: "none",
+  outfit: "tee", shirt: SHIRT, shorts: SHORTS, dress: "#9FD0F0", feet: "bare",
+};
+const lookOf = (l?: Look): Required<Look> => ({ ...HARRISON_LOOK, ...(l ?? {}) });
+
 export type HarrisonPose = {
+  look?: Look;
+  /** foot targets relative to the origin (legs are 2-bone IK too); omit to stand */
+  footL?: Pt;
+  footR?: Pt;
   expression?: Expression;
   /** where the pupils look, -1..1 */
   lookX?: number;
@@ -74,6 +98,21 @@ function ik(s: Pt, target: Pt, side: number, elbowUp: boolean): { e: Pt; h: Pt }
 }
 
 /** Stick limb: a single ink line. */
+/** Generic 2-bone IK with given bone lengths; the knee/elbow bends towards `side` (x sign). */
+function ik2(s: Pt, target: Pt, l1: number, l2: number, side: number): { e: Pt; h: Pt } {
+  let dx = target.x - s.x;
+  let dy = target.y - s.y;
+  let d = Math.hypot(dx, dy);
+  const max = l1 + l2 - 0.5;
+  if (d > max) { dx *= max / d; dy *= max / d; d = max; }
+  d = Math.max(d, 20);
+  const a = Math.acos(Math.min(1, Math.max(-1, (l1 * l1 + d * d - l2 * l2) / (2 * l1 * d))));
+  const base = Math.atan2(dy, dx);
+  const c1 = { x: s.x + l1 * Math.cos(base + a), y: s.y + l1 * Math.sin(base + a) };
+  const c2 = { x: s.x + l1 * Math.cos(base - a), y: s.y + l1 * Math.sin(base - a) };
+  return { e: side * c1.x > side * c2.x ? c1 : c2, h: { x: s.x + dx, y: s.y + dy } };
+}
+
 const Limb: React.FC<{ pts: Pt[]; w?: number }> = ({ pts, w = 8 }) => {
   const d = pts.map((p, i) => `${i ? "L" : "M"}${p.x.toFixed(1)} ${p.y.toFixed(1)}`).join(" ");
   return <path d={d} stroke={INK} strokeWidth={w} fill="none" strokeLinecap="round" strokeLinejoin="round" />;
@@ -179,6 +218,7 @@ function Mouth({ expression, open, turn }: { expression: Expression; open: numbe
 }
 
 export const HarrisonHead: React.FC<{ pose: HarrisonPose }> = ({ pose }) => {
+  const L = lookOf(pose.look);
   const e = pose.expression ?? "neutral";
   const turn = pose.turn ?? 0;
   const fx = turn * 22; // face features shift with the turn
@@ -188,25 +228,62 @@ export const HarrisonHead: React.FC<{ pose: HarrisonPose }> = ({ pose }) => {
   const by = (a: number) => HC.y + Math.sin(a) * HR;
   return (
     <g transform={`rotate(${pose.headTilt ?? 0} 0 -440)`}>
+      {/* long hair falls behind the head */}
+      {L.hair === "long" && (
+        <path d={`M${-92 + turn * 6} -540 C${-104 + turn * 6} -480 ${-104 + turn * 6} -420 ${-90 + turn * 6} -380 L${-50 + turn * 6} -392 L0 -400 L${50 + turn * 6} -392 L${90 + turn * 6} -380
+          C${104 + turn * 6} -420 ${104 + turn * 6} -480 ${92 + turn * 6} -540 Z`} fill={L.hairColor} stroke={INK} strokeWidth={6} strokeLinejoin="round" />
+      )}
+      {L.hair === "bun" && <circle cx={turn * 10} cy={-618} r={34} fill={L.hairColor} stroke={INK} strokeWidth={6} />}
       {/* round white head */}
       <circle cx={HC.x} cy={HC.y} r={HR} fill={SKIN} stroke={INK} strokeWidth={6} />
       {/* stubble beard: a band along the jaw, thicker at the chin */}
       <clipPath id="harrison-head"><circle cx={HC.x} cy={HC.y} r={HR - 2} /></clipPath>
-      <g clipPath="url(#harrison-head)">
+      {L.beard && <g clipPath="url(#harrison-head)">
         <path d={`M${bx(a0)} ${by(a0)} A${HR} ${HR} 0 0 0 ${bx(a1)} ${by(a1)}
           C${70 + fx * 0.3} -496 ${58 + fx} -452 ${18 + fx} -452 C${10 + fx} -462 ${-10 + fx} -462 ${-18 + fx} -452 C${-58 + fx} -452 ${-70 + fx * 0.3} -496 ${bx(a0)} ${by(a0)} Z`}
           fill={HAIR} />
         {/* moustache */}
         <path d={`M${-22 + fx} -486 Q${fx} -498 ${22 + fx} -486 Q${fx} -490 ${-22 + fx} -486 Z`} fill={HAIR} stroke={HAIR} strokeWidth={6} strokeLinejoin="round" />
-      </g>
+      </g>}
       <circle cx={HC.x} cy={HC.y} r={HR} fill="none" stroke={INK} strokeWidth={6} />
+      {/* hair cap with a fringe (long / bun / short) */}
+      {(L.hair === "long" || L.hair === "bun" || L.hair === "short") && (
+        <path d={`M${-88 + turn * 4} -520 C${-96 + turn * 4} -600 ${-40 + turn * 4} -624 ${turn * 4} -622 C${40 + turn * 4} -624 ${96 + turn * 4} -600 ${88 + turn * 4} -520
+          C${78 + turn * 4} ${L.hair === "short" ? -566 : -548} ${56 + turn * 8} ${L.hair === "short" ? -578 : -566} ${30 + turn * 10} -566 C${10 + turn * 10} -580 ${-14 + turn * 10} -560 ${-30 + turn * 10} -572
+          C${-56 + turn * 8} ${L.hair === "short" ? -578 : -566} ${-78 + turn * 4} ${L.hair === "short" ? -566 : -548} ${-88 + turn * 4} -520 Z`}
+          fill={L.hairColor} stroke={INK} strokeWidth={6} strokeLinejoin="round" />
+      )}
       {/* messy hair tufts on top */}
-      {[[-52, -586, -70, -618, -86, -626], [-26, -600, -36, -636, -52, -648], [-4, -604, 0, -640, -14, -656], [18, -602, 30, -636, 24, -652], [40, -594, 58, -620, 70, -634]].map(([x1, y1, cx, cy, x2, y2], i) => (
+      {L.hair === "tufts" && [[-52, -586, -70, -618, -86, -626], [-26, -600, -36, -636, -52, -648], [-4, -604, 0, -640, -14, -656], [18, -602, 30, -636, 24, -652], [40, -594, 58, -620, 70, -634]].map(([x1, y1, cx, cy, x2, y2], i) => (
         <path key={i} d={`M${x1 + turn * 8} ${y1} Q${cx + turn * 8} ${cy} ${x2 + turn * 8} ${y2}`} stroke={INK} strokeWidth={5} fill="none" strokeLinecap="round" />
       ))}
       <Eyes expression={e} lookX={pose.lookX ?? 0} lookY={pose.lookY ?? 0} blink={pose.blink ?? 0} turn={turn} />
+      {L.lashes && e !== "calm" && (pose.blink ?? 0) < 0.6 && [-1, 1].map((sd) => {
+        const x = sd * 30 + turn * 22 + sd * 9;
+        return <path key={sd} d={`M${x} -532 l${sd * 9} -9 M${x - sd * 4} -534 l${sd * 4} -11`} stroke={INK} strokeWidth={4} strokeLinecap="round" />;
+      })}
+      {L.glasses && (
+        <g fill="none" stroke={INK} strokeWidth={5}>
+          {[-1, 1].map((sd) => <circle key={sd} cx={sd * 30 + turn * 22} cy={-522} r={21} fill="rgba(255,255,255,0.15)" />)}
+          <path d={`M${-9 + turn * 22} -524 Q${turn * 22} -530 ${9 + turn * 22} -524`} />
+        </g>
+      )}
       <Brows expression={e} turn={turn} />
       <Mouth expression={e} open={pose.mouthOpen ?? 0} turn={turn} />
+      {L.hat === "bush" && (
+        <g transform={`translate(${turn * 6} 0)`}>
+          <ellipse cx={0} cy={-590} rx={128} ry={22} fill="#C8A86B" stroke={INK} strokeWidth={6} />
+          <path d="M-70 -592 C-70 -660 70 -660 70 -592 Z" fill="#C8A86B" stroke={INK} strokeWidth={6} />
+          <path d="M-68 -606 H68" stroke="#6E5530" strokeWidth={10} />
+        </g>
+      )}
+      {L.hat === "straw" && (
+        <g transform={`translate(${turn * 6} 0)`}>
+          <ellipse cx={0} cy={-588} rx={150} ry={26} fill="#E8C766" stroke={INK} strokeWidth={6} />
+          <path d="M-64 -590 C-60 -650 60 -650 64 -590 Z" fill="#E8C766" stroke={INK} strokeWidth={6} />
+          <path d="M-62 -600 H62" stroke="#B5432F" strokeWidth={9} />
+        </g>
+      )}
       {/* sweat drops */}
       {(pose.sweat ?? 0) > 0.05 && (
         <g opacity={Math.min(1, pose.sweat ?? 0)}>
@@ -233,47 +310,74 @@ export const Harrison: React.FC<{ pose?: HarrisonPose; x?: number; y?: number; s
   const restR = { x: 112, y: -186 };
   const tL = pose.pray ? { x: pose.pray.x - 8, y: pose.pray.y + 26 } : pose.handL ?? restL;
   const tR = pose.pray ? { x: pose.pray.x + 8, y: pose.pray.y + 26 } : pose.handR ?? restR;
-  const shL = { x: SH_L.x, y: SH_L.y + lift };
-  const shR = { x: SH_R.x, y: SH_R.y + lift };
+  const L = lookOf(pose.look);
+  const dress = L.outfit === "dress";
+  const shX = dress ? 60 : SH_R.x;
+  const shL = { x: -shX, y: SH_L.y + lift + (dress ? 4 : 0) };
+  const shR = { x: shX, y: SH_R.y + lift + (dress ? 4 : 0) };
   const aL = ik(shL, tL, -1, !!pose.elbowUpL);
   const aR = ik(shR, tR, 1, !!pose.elbowUpR);
   const handsOnFace = (p?: Pt) => !!p && p.y < -430 && Math.abs(p.x) < 120;
   const legs = pose.legs !== false;
+  const hipL = { x: -40, y: -200 };
+  const hipR = { x: 40, y: -200 };
+  const lL = ik2(hipL, pose.footL ?? { x: -46, y: -8 }, 100, 96, -1);
+  const lR = ik2(hipR, pose.footR ?? { x: 46, y: -8 }, 100, 96, 1);
+  const foot = (f: Pt, side: number, sandal: boolean) => (
+    <g key={side}>
+      {sandal && <path d={`M${f.x + side * 2} ${f.y + 9} L${f.x + side * 40} ${f.y + 9}`} stroke="#8B5A2B" strokeWidth={12} strokeLinecap="round" />}
+      {L.feet === "shoes" && <path d={`M${f.x - side * 6} ${f.y + 2} L${f.x + side * 42} ${f.y + 2}`} stroke={INK} strokeWidth={18} strokeLinecap="round" />}
+      <Limb pts={[f, { x: f.x + side * 36, y: f.y }]} />
+      {sandal && <path d={`M${f.x + side * 14} ${f.y - 10} L${f.x + side * 22} ${f.y + 8}`} stroke="#8B5A2B" strokeWidth={6} strokeLinecap="round" />}
+    </g>
+  );
 
   return (
     <g transform={`translate(${x + jx} ${y + jy}) scale(${flip ? -scale : scale} ${scale})`}>
       {legs && (
         <g>
-          <Limb pts={[{ x: -40, y: -200 }, { x: -44, y: -100 }, { x: -46, y: -8 }]} />
-          <Limb pts={[{ x: 40, y: -200 }, { x: 44, y: -100 }, { x: 46, y: -8 }]} />
-          <Limb pts={[{ x: -46, y: -8 }, { x: -82, y: -8 }]} />
-          <Limb pts={[{ x: 46, y: -8 }, { x: 82, y: -8 }]} />
-          {/* shorts */}
-          <path d="M-86 -262 L86 -262 L94 -148 L10 -148 L0 -196 L-10 -148 L-94 -148 Z" fill={SHORTS} stroke={INK} strokeWidth={6} strokeLinejoin="round" />
+          <Limb pts={[hipL, lL.e, lL.h]} />
+          <Limb pts={[hipR, lR.e, lR.h]} />
+          {foot(lL.h, -1, L.feet === "oneSandal")}
+          {foot(lR.h, 1, false)}
+          {/* shorts (a dress covers the hips instead) */}
+          {!dress && <path d="M-86 -262 L86 -262 L94 -148 L10 -148 L0 -196 L-10 -148 L-94 -148 Z" fill={L.shorts} stroke={INK} strokeWidth={6} strokeLinejoin="round" />}
         </g>
       )}
       {/* neck */}
       <path d={`M0 -436 L0 ${-400 + lift}`} stroke={INK} strokeWidth={8} />
-      {/* sleeves first (they point along the upper arm), then the shirt body over their inner ends */}
-      {[{ s: shL, e: aL.e, side: -1 }, { s: shR, e: aR.e, side: 1 }].map(({ s, e, side }) => {
-        const ang = (Math.atan2(e.y - s.y, e.x - s.x) * 180) / Math.PI;
-        return (
-          <g key={side} transform={`translate(${s.x} ${s.y}) rotate(${ang})`}>
-            <path d="M-30 -32 L50 -26 L52 26 L-30 32 Z" fill={SHIRT} stroke={INK} strokeWidth={6} strokeLinejoin="round" />
+      {dress ? (
+        <g transform={`translate(0 ${lift})`}>
+          {/* sleeveless dress: thin straps, flared skirt */}
+          <path d={`M-62 -410 L-40 -410 C-20 -396 20 -396 40 -410 L62 -410 L84 -290 L${legs ? 118 : 96} ${legs ? -150 : -250} L${legs ? -118 : -96} ${legs ? -150 : -250} L-84 -290 Z`}
+            fill={L.dress} stroke={INK} strokeWidth={6} strokeLinejoin="round" />
+          <path d="M-84 -290 Q0 -276 84 -290" stroke={INK} strokeWidth={4} fill="none" opacity={0.6} />
+          {legs && [-70, -20, 30, 80].map((x, i) => <circle key={i} cx={x} cy={-200 + (i % 2) * 18} r={7} fill="#fff" opacity={0.7} />)}
+        </g>
+      ) : (
+        <>
+          {[{ s: shL, e: aL.e, side: -1 }, { s: shR, e: aR.e, side: 1 }].map(({ s, e, side }) => {
+            const ang = (Math.atan2(e.y - s.y, e.x - s.x) * 180) / Math.PI;
+            return (
+              <g key={side} transform={`translate(${s.x} ${s.y}) rotate(${ang})`}>
+                <path d="M-30 -32 L50 -26 L52 26 L-30 32 Z" fill={L.shirt} stroke={INK} strokeWidth={6} strokeLinejoin="round" />
+              </g>
+            );
+          })}
+          <g transform={`translate(0 ${lift})`}>
+            <path d="M-90 -404 C-60 -414 -36 -416 -26 -412 C-14 -398 14 -398 26 -412 C36 -416 60 -414 90 -404 L96 -250 L-96 -250 Z"
+              fill={L.shirt} stroke={INK} strokeWidth={6} strokeLinejoin="round" />
+            <path d="M-26 -412 C-14 -394 14 -394 26 -412" stroke={INK} strokeWidth={5} fill="none" />
           </g>
-        );
-      })}
-      <g transform={`translate(0 ${lift})`}>
-        <path d="M-90 -404 C-60 -414 -36 -416 -26 -412 C-14 -398 14 -398 26 -412 C36 -416 60 -414 90 -404 L96 -250 L-96 -250 Z"
-          fill={SHIRT} stroke={INK} strokeWidth={6} strokeLinejoin="round" />
-        <path d="M-26 -412 C-14 -394 14 -394 26 -412" stroke={INK} strokeWidth={5} fill="none" />
-      </g>
+        </>
+      )}
       {/* arms come out of the sleeve openings */}
       {[{ s: shL, a: aL }, { s: shR, a: aR }].map(({ s, a }, i) => {
         const dx = a.e.x - s.x;
         const dy = a.e.y - s.y;
         const d = Math.hypot(dx, dy) || 1;
-        const cuff = { x: s.x + (dx / d) * 46, y: s.y + (dy / d) * 46 };
+        const off = dress ? 10 : 46; // bare shoulders on the dress
+        const cuff = { x: s.x + (dx / d) * off, y: s.y + (dy / d) * off };
         return <Limb key={i} pts={[cuff, a.e, a.h]} />;
       })}
       <HarrisonHead pose={pose} />
