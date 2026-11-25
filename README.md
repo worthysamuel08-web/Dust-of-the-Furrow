@@ -1,5 +1,15 @@
 # Video Studio — Three.js + Remotion
 
+## Skit: "Bro Went Dark" — two-character dialogue (vertical, 21 s)
+
+No narrator: two meme-style stick guys talk, each with his own voice (Piper `en_US-ryan-high` and `en_US-joe-medium`,
+pitched up), mouths driven by the audio, a cut on every line, the line on screen like the meme format.
+```bash
+npm run render:browentdark      # → out/bro-went-dark.mp4
+npm run audio:browentdark       # rebuild after editing the lines in scripts/build-browentdark-audio.py
+```
+Code: `src/shorts/browentdark/Guy.tsx` (character: mouths, lids, brows, arms) and `BroWentDark.tsx` (shots per line in `SHOTS`).
+
 ## Short: "The Girl Who Fell From the Sky" — Juliane Koepcke (vertical, 60 s)
 
 Juliane Koepcke, 17, sole survivor of LANSA Flight 508 (Christmas Eve 1971): she fell about 3 km strapped to her
