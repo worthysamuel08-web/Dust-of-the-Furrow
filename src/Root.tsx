@@ -7,6 +7,8 @@ import { SCENE1_DURATION, SCENE1_FPS } from "./scenes/scene1/timeline";
 import { AnyScene, Documentary, makeScenePreview } from "./film/Documentary";
 import { FILM_DURATION, FILM_FPS, FILM_SCENES } from "./film/scenes";
 import { SCENE2_DURATION, SCENE2_FPS } from "./scenes/scene2/timeline";
+import { PoseSheet } from "./shorts/airpocket/PoseSheet";
+import { AIRPOCKET_DURATION, AIRPOCKET_FPS, AirPocket } from "./shorts/airpocket/AirPocket";
 
 const Scene2Preview = makeScenePreview(2);
 const NARRATION_ON = { showNarration: true };
@@ -88,6 +90,12 @@ export const RemotionRoot: React.FC = () => {
           height={720}
           defaultProps={FILM_PROPS}
         />
+      </Folder>
+      <Folder name="Air-Pocket">
+        {/* The short: 1080x1920 vertical, voice + captions + sound */}
+        <Composition id="AirPocket" component={AirPocket} durationInFrames={AIRPOCKET_DURATION} fps={AIRPOCKET_FPS} width={1080} height={1920} defaultProps={{ captions: true, audio: true }} />
+        <Composition id="AirPocket-540p" component={AirPocket} durationInFrames={AIRPOCKET_DURATION} fps={AIRPOCKET_FPS} width={540} height={960} defaultProps={{ captions: true, audio: true }} />
+        <Composition id="Harrison-PoseSheet" component={PoseSheet} durationInFrames={1} fps={30} width={2400} height={1500} />
       </Folder>
       <Folder name="Dev">
         <Composition id="StyleTest-Silhouette" component={StyleTest} durationInFrames={STYLE_TEST_DURATION} fps={30} width={1920} height={1080} />

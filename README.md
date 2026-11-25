@@ -1,5 +1,28 @@
 # Video Studio — Three.js + Remotion
 
+## Short: "Air Pocket" — Harrison's three days under the sea (vertical, 63 s)
+
+A YouTube-Shorts-style explainer (1080x1920, 30 fps) about Harrison Okene, the ship's cook who survived
+about 60 hours in an air bubble inside a capsized tug at 30 m (off Nigeria, May 2013). Stickman look from the
+reference sheet: round white head, messy hair, stubble beard, white T-shirt, navy shorts.
+
+```bash
+npm run render:airpocket        # 1080x1920 → out/air-pocket.mp4 (≈2 min on 4 cores, no GPU needed: pure SVG)
+npm run render:airpocket:540p   # quick preview
+npm run audio:airpocket         # rebuild voice, word timings, music + sound effects after editing the script
+```
+Studio: **Air-Pocket → AirPocket** (props: `captions`, `audio`); **Harrison-PoseSheet** shows the character's poses.
+
+| Path | Purpose |
+|---|---|
+| `scripts/build-airpocket-audio.py` | The narration script (16 beats), Piper voice `en_US-ryan-high`, faster-whisper word timings, synthesised music/SFX → `public/airpocket/`, `src/shorts/airpocket/timing.json` |
+| `src/shorts/airpocket/Harrison.tsx` | The stickman rig: expressions, IK arms (hand targets), praying, flashlight, shiver, sweat |
+| `src/shorts/airpocket/kit.tsx` | Boat, diver, flooded upside-down room, water, light beams, darkness, comic text, labels |
+| `src/shorts/airpocket/beats.tsx` | The 16 scenes; every action is keyed to a measured word time `w(i)` |
+| `src/shorts/airpocket/AirPocket.tsx` | Sequencing, word-by-word captions, sound mix |
+
+---
+
 ## The Dust of the Furrow — Scene 1: "The Soil of 1320"
 
 **House style:** black-silhouette characters, stylised sets, depth of field, letterbox, multi-shot editing. See `docs/style-guide.md`; the test bench is **Dev → StyleTest-Silhouette**.

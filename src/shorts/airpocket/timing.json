@@ -1,0 +1,1204 @@
+{
+ "total": 63.265,
+ "beats": [
+  {
+   "id": "hook",
+   "start": 0.6,
+   "parts": [
+    {
+     "text": "Imagine being stuck at the bottom of the sea\u2026",
+     "start": 0.6,
+     "end": 2.84
+    },
+    {
+     "text": "for three days.",
+     "start": 3.14,
+     "end": 4.081
+    }
+   ],
+   "end": 4.631,
+   "words": [
+    {
+     "text": "Imagine",
+     "start": 0.6,
+     "end": 0.92
+    },
+    {
+     "text": "being",
+     "start": 0.92,
+     "end": 1.26
+    },
+    {
+     "text": "stuck",
+     "start": 1.26,
+     "end": 1.58
+    },
+    {
+     "text": "at",
+     "start": 1.58,
+     "end": 1.82
+    },
+    {
+     "text": "the",
+     "start": 1.82,
+     "end": 1.96
+    },
+    {
+     "text": "bottom",
+     "start": 1.96,
+     "end": 2.2
+    },
+    {
+     "text": "of",
+     "start": 2.2,
+     "end": 2.44
+    },
+    {
+     "text": "the",
+     "start": 2.44,
+     "end": 2.54
+    },
+    {
+     "text": "sea\u2026",
+     "start": 2.54,
+     "end": 2.76
+    },
+    {
+     "text": "for",
+     "start": 3.14,
+     "end": 3.3
+    },
+    {
+     "text": "three",
+     "start": 3.3,
+     "end": 3.62
+    },
+    {
+     "text": "days.",
+     "start": 3.62,
+     "end": 4.0
+    }
+   ]
+  },
+  {
+   "id": "cook",
+   "start": 4.631,
+   "parts": [
+    {
+     "text": "This really happened to a cook named Harrison.",
+     "start": 4.631,
+     "end": 6.984
+    }
+   ],
+   "end": 7.434,
+   "words": [
+    {
+     "text": "This",
+     "start": 4.66,
+     "end": 4.82
+    },
+    {
+     "text": "really",
+     "start": 4.82,
+     "end": 5.14
+    },
+    {
+     "text": "happened",
+     "start": 5.14,
+     "end": 5.56
+    },
+    {
+     "text": "to",
+     "start": 5.56,
+     "end": 5.8
+    },
+    {
+     "text": "a",
+     "start": 5.8,
+     "end": 5.92
+    },
+    {
+     "text": "cook",
+     "start": 5.92,
+     "end": 6.1
+    },
+    {
+     "text": "named",
+     "start": 6.1,
+     "end": 6.44
+    },
+    {
+     "text": "Harrison.",
+     "start": 6.44,
+     "end": 6.8
+    }
+   ]
+  },
+  {
+   "id": "bathroom",
+   "start": 7.434,
+   "parts": [
+    {
+     "text": "He was just in the bathroom.",
+     "start": 7.434,
+     "end": 8.851
+    }
+   ],
+   "end": 9.201,
+   "words": [
+    {
+     "text": "He",
+     "start": 7.44,
+     "end": 7.54
+    },
+    {
+     "text": "was",
+     "start": 7.54,
+     "end": 7.68
+    },
+    {
+     "text": "just",
+     "start": 7.68,
+     "end": 7.94
+    },
+    {
+     "text": "in",
+     "start": 7.94,
+     "end": 8.18
+    },
+    {
+     "text": "the",
+     "start": 8.18,
+     "end": 8.3
+    },
+    {
+     "text": "bathroom.",
+     "start": 8.3,
+     "end": 8.74
+    }
+   ]
+  },
+  {
+   "id": "boom",
+   "start": 9.201,
+   "parts": [
+    {
+     "text": "Then \u2014 BOOM.",
+     "start": 9.201,
+     "end": 9.746
+    },
+    {
+     "text": "A giant wave flips his boat over.",
+     "start": 9.996,
+     "end": 12.291
+    }
+   ],
+   "end": 12.691,
+   "words": [
+    {
+     "text": "Then",
+     "start": 9.201,
+     "end": 9.34
+    },
+    {
+     "text": "\u2014",
+     "start": 9.34,
+     "end": 9.42
+    },
+    {
+     "text": "BOOM.",
+     "start": 9.34,
+     "end": 9.6
+    },
+    {
+     "text": "A",
+     "start": 9.996,
+     "end": 10.14
+    },
+    {
+     "text": "giant",
+     "start": 10.14,
+     "end": 10.58
+    },
+    {
+     "text": "wave",
+     "start": 10.58,
+     "end": 11.02
+    },
+    {
+     "text": "flips",
+     "start": 11.02,
+     "end": 11.38
+    },
+    {
+     "text": "his",
+     "start": 11.38,
+     "end": 11.64
+    },
+    {
+     "text": "boat",
+     "start": 11.64,
+     "end": 11.86
+    },
+    {
+     "text": "over.",
+     "start": 11.86,
+     "end": 12.24
+    }
+   ]
+  },
+  {
+   "id": "sinks",
+   "start": 12.691,
+   "parts": [
+    {
+     "text": "And it sinks.",
+     "start": 12.691,
+     "end": 13.515
+    },
+    {
+     "text": "All the way down.",
+     "start": 13.715,
+     "end": 14.713
+    }
+   ],
+   "end": 15.213,
+   "words": [
+    {
+     "text": "And",
+     "start": 12.691,
+     "end": 12.86
+    },
+    {
+     "text": "it",
+     "start": 12.86,
+     "end": 13.04
+    },
+    {
+     "text": "sinks.",
+     "start": 13.04,
+     "end": 13.36
+    },
+    {
+     "text": "All",
+     "start": 13.715,
+     "end": 13.88
+    },
+    {
+     "text": "the",
+     "start": 13.88,
+     "end": 14.0
+    },
+    {
+     "text": "way",
+     "start": 14.0,
+     "end": 14.2
+    },
+    {
+     "text": "down.",
+     "start": 14.2,
+     "end": 14.56
+    }
+   ]
+  },
+  {
+   "id": "trapped",
+   "start": 15.213,
+   "parts": [
+    {
+     "text": "Now he's trapped.",
+     "start": 15.213,
+     "end": 16.197
+    },
+    {
+     "text": "It's dark.",
+     "start": 16.397,
+     "end": 17.082
+    },
+    {
+     "text": "The water is freezing.",
+     "start": 17.282,
+     "end": 18.501
+    },
+    {
+     "text": "And he's only in his underwear.",
+     "start": 18.751,
+     "end": 20.255
+    }
+   ],
+   "end": 20.705,
+   "words": [
+    {
+     "text": "Now",
+     "start": 15.26,
+     "end": 15.42
+    },
+    {
+     "text": "he's",
+     "start": 15.42,
+     "end": 15.68
+    },
+    {
+     "text": "trapped.",
+     "start": 15.68,
+     "end": 16.08
+    },
+    {
+     "text": "It's",
+     "start": 16.397,
+     "end": 16.64
+    },
+    {
+     "text": "dark.",
+     "start": 16.64,
+     "end": 16.94
+    },
+    {
+     "text": "The",
+     "start": 17.282,
+     "end": 17.4
+    },
+    {
+     "text": "water",
+     "start": 17.4,
+     "end": 17.62
+    },
+    {
+     "text": "is",
+     "start": 17.62,
+     "end": 17.94
+    },
+    {
+     "text": "freezing.",
+     "start": 17.94,
+     "end": 18.32
+    },
+    {
+     "text": "And",
+     "start": 18.751,
+     "end": 18.86
+    },
+    {
+     "text": "he's",
+     "start": 18.86,
+     "end": 19.06
+    },
+    {
+     "text": "only",
+     "start": 19.06,
+     "end": 19.32
+    },
+    {
+     "text": "in",
+     "start": 19.32,
+     "end": 19.56
+    },
+    {
+     "text": "his",
+     "start": 19.56,
+     "end": 19.7
+    },
+    {
+     "text": "underwear.",
+     "start": 19.7,
+     "end": 20.1
+    }
+   ]
+  },
+  {
+   "id": "dark",
+   "start": 20.705,
+   "parts": [
+    {
+     "text": "His flashlight dies.",
+     "start": 20.705,
+     "end": 22.006
+    },
+    {
+     "text": "He can't see anything.",
+     "start": 22.256,
+     "end": 23.442
+    },
+    {
+     "text": "He just keeps praying.",
+     "start": 23.742,
+     "end": 24.841
+    }
+   ],
+   "end": 25.391,
+   "words": [
+    {
+     "text": "His",
+     "start": 20.705,
+     "end": 20.86
+    },
+    {
+     "text": "flashlight",
+     "start": 20.86,
+     "end": 21.3
+    },
+    {
+     "text": "dies.",
+     "start": 21.3,
+     "end": 21.8
+    },
+    {
+     "text": "He",
+     "start": 22.256,
+     "end": 22.38
+    },
+    {
+     "text": "can't",
+     "start": 22.38,
+     "end": 22.7
+    },
+    {
+     "text": "see",
+     "start": 22.7,
+     "end": 22.92
+    },
+    {
+     "text": "anything.",
+     "start": 22.92,
+     "end": 23.34
+    },
+    {
+     "text": "He",
+     "start": 23.742,
+     "end": 23.84
+    },
+    {
+     "text": "just",
+     "start": 23.84,
+     "end": 24.04
+    },
+    {
+     "text": "keeps",
+     "start": 24.04,
+     "end": 24.26
+    },
+    {
+     "text": "praying.",
+     "start": 24.26,
+     "end": 24.68
+    }
+   ]
+  },
+  {
+   "id": "breathe",
+   "start": 25.391,
+   "parts": [
+    {
+     "text": "And here's the crazy part\u2026",
+     "start": 25.391,
+     "end": 26.861
+    },
+    {
+     "text": "he can still breathe.",
+     "start": 27.311,
+     "end": 28.346
+    }
+   ],
+   "end": 28.846,
+   "words": [
+    {
+     "text": "And",
+     "start": 25.391,
+     "end": 25.52
+    },
+    {
+     "text": "here's",
+     "start": 25.52,
+     "end": 25.84
+    },
+    {
+     "text": "the",
+     "start": 25.84,
+     "end": 26.0
+    },
+    {
+     "text": "crazy",
+     "start": 26.0,
+     "end": 26.3
+    },
+    {
+     "text": "part\u2026",
+     "start": 26.3,
+     "end": 26.68
+    },
+    {
+     "text": "he",
+     "start": 27.311,
+     "end": 27.4
+    },
+    {
+     "text": "can",
+     "start": 27.4,
+     "end": 27.58
+    },
+    {
+     "text": "still",
+     "start": 27.58,
+     "end": 27.84
+    },
+    {
+     "text": "breathe.",
+     "start": 27.84,
+     "end": 28.18
+    }
+   ]
+  },
+  {
+   "id": "airpocket",
+   "start": 28.846,
+   "parts": [
+    {
+     "text": "When the boat flipped, a little bit of air got stuck at the top.",
+     "start": 28.846,
+     "end": 31.667
+    }
+   ],
+   "end": 31.967,
+   "words": [
+    {
+     "text": "When",
+     "start": 28.846,
+     "end": 28.926
+    },
+    {
+     "text": "the",
+     "start": 28.92,
+     "end": 29.06
+    },
+    {
+     "text": "boat",
+     "start": 29.06,
+     "end": 29.26
+    },
+    {
+     "text": "flipped,",
+     "start": 29.26,
+     "end": 29.6
+    },
+    {
+     "text": "a",
+     "start": 29.84,
+     "end": 29.94
+    },
+    {
+     "text": "little",
+     "start": 29.94,
+     "end": 30.06
+    },
+    {
+     "text": "bit",
+     "start": 30.06,
+     "end": 30.3
+    },
+    {
+     "text": "of",
+     "start": 30.3,
+     "end": 30.42
+    },
+    {
+     "text": "air",
+     "start": 30.42,
+     "end": 30.6
+    },
+    {
+     "text": "got",
+     "start": 30.6,
+     "end": 30.8
+    },
+    {
+     "text": "stuck",
+     "start": 30.8,
+     "end": 31.12
+    },
+    {
+     "text": "at",
+     "start": 31.12,
+     "end": 31.3
+    },
+    {
+     "text": "the",
+     "start": 31.3,
+     "end": 31.44
+    },
+    {
+     "text": "top.",
+     "start": 31.44,
+     "end": 31.68
+    }
+   ]
+  },
+  {
+   "id": "cup",
+   "start": 31.967,
+   "parts": [
+    {
+     "text": "Kind of like when you push a cup upside down in water.",
+     "start": 31.967,
+     "end": 34.464
+    },
+    {
+     "text": "The air stays in.",
+     "start": 34.714,
+     "end": 35.77
+    }
+   ],
+   "end": 36.32,
+   "words": [
+    {
+     "text": "Kind",
+     "start": 32.04,
+     "end": 32.12
+    },
+    {
+     "text": "of",
+     "start": 32.12,
+     "end": 32.26
+    },
+    {
+     "text": "like",
+     "start": 32.26,
+     "end": 32.44
+    },
+    {
+     "text": "when",
+     "start": 32.44,
+     "end": 32.62
+    },
+    {
+     "text": "you",
+     "start": 32.62,
+     "end": 32.8
+    },
+    {
+     "text": "push",
+     "start": 32.8,
+     "end": 32.94
+    },
+    {
+     "text": "a",
+     "start": 32.94,
+     "end": 33.1
+    },
+    {
+     "text": "cup",
+     "start": 33.1,
+     "end": 33.22
+    },
+    {
+     "text": "upside",
+     "start": 33.22,
+     "end": 33.6
+    },
+    {
+     "text": "down",
+     "start": 33.6,
+     "end": 33.94
+    },
+    {
+     "text": "in",
+     "start": 33.94,
+     "end": 34.1
+    },
+    {
+     "text": "water.",
+     "start": 34.1,
+     "end": 34.38
+    },
+    {
+     "text": "The",
+     "start": 34.72,
+     "end": 34.82
+    },
+    {
+     "text": "air",
+     "start": 34.855,
+     "end": 34.935
+    },
+    {
+     "text": "stays",
+     "start": 34.96,
+     "end": 35.36
+    },
+    {
+     "text": "in.",
+     "start": 35.36,
+     "end": 35.72
+    }
+   ]
+  },
+  {
+   "id": "knock",
+   "start": 36.32,
+   "parts": [
+    {
+     "text": "Three days later, he hears something.",
+     "start": 36.32,
+     "end": 38.468
+    },
+    {
+     "text": "Knock\u2026",
+     "start": 38.818,
+     "end": 39.175
+    },
+    {
+     "text": "knock.",
+     "start": 39.675,
+     "end": 39.965
+    }
+   ],
+   "end": 40.565,
+   "words": [
+    {
+     "text": "Three",
+     "start": 36.32,
+     "end": 36.56
+    },
+    {
+     "text": "days",
+     "start": 36.56,
+     "end": 36.84
+    },
+    {
+     "text": "later,",
+     "start": 36.84,
+     "end": 37.36
+    },
+    {
+     "text": "he",
+     "start": 37.6,
+     "end": 37.78
+    },
+    {
+     "text": "hears",
+     "start": 37.78,
+     "end": 38.0
+    },
+    {
+     "text": "something.",
+     "start": 38.0,
+     "end": 38.44
+    },
+    {
+     "text": "Knock\u2026",
+     "start": 38.907,
+     "end": 38.996
+    },
+    {
+     "text": "knock.",
+     "start": 39.748,
+     "end": 39.828
+    }
+   ]
+  },
+  {
+   "id": "knockback",
+   "start": 40.565,
+   "parts": [
+    {
+     "text": "He knocks back as hard as he can.",
+     "start": 40.565,
+     "end": 42.503
+    }
+   ],
+   "end": 42.953,
+   "words": [
+    {
+     "text": "He",
+     "start": 40.565,
+     "end": 40.68
+    },
+    {
+     "text": "knocks",
+     "start": 40.68,
+     "end": 40.86
+    },
+    {
+     "text": "back",
+     "start": 40.86,
+     "end": 41.18
+    },
+    {
+     "text": "as",
+     "start": 41.18,
+     "end": 41.4
+    },
+    {
+     "text": "hard",
+     "start": 41.4,
+     "end": 41.68
+    },
+    {
+     "text": "as",
+     "start": 41.68,
+     "end": 41.92
+    },
+    {
+     "text": "he",
+     "start": 41.92,
+     "end": 42.1
+    },
+    {
+     "text": "can.",
+     "start": 42.1,
+     "end": 42.48
+    }
+   ]
+  },
+  {
+   "id": "diver",
+   "start": 42.953,
+   "parts": [
+    {
+     "text": "A diver comes in, thinking everyone's gone\u2026",
+     "start": 42.953,
+     "end": 45.763
+    },
+    {
+     "text": "and sees a hand.",
+     "start": 46.213,
+     "end": 47.2
+    }
+   ],
+   "end": 47.8,
+   "words": [
+    {
+     "text": "A",
+     "start": 42.953,
+     "end": 43.06
+    },
+    {
+     "text": "diver",
+     "start": 43.06,
+     "end": 43.42
+    },
+    {
+     "text": "comes",
+     "start": 43.42,
+     "end": 43.78
+    },
+    {
+     "text": "in,",
+     "start": 43.78,
+     "end": 44.18
+    },
+    {
+     "text": "thinking",
+     "start": 44.44,
+     "end": 44.7
+    },
+    {
+     "text": "everyone's",
+     "start": 44.7,
+     "end": 45.36
+    },
+    {
+     "text": "gone\u2026",
+     "start": 45.36,
+     "end": 45.62
+    },
+    {
+     "text": "and",
+     "start": 46.213,
+     "end": 46.34
+    },
+    {
+     "text": "sees",
+     "start": 46.34,
+     "end": 46.6
+    },
+    {
+     "text": "a",
+     "start": 46.6,
+     "end": 46.8
+    },
+    {
+     "text": "hand.",
+     "start": 46.8,
+     "end": 47.12
+    }
+   ]
+  },
+  {
+   "id": "bends",
+   "start": 47.8,
+   "parts": [
+    {
+     "text": "But even then, he can't just swim up.",
+     "start": 47.8,
+     "end": 49.936
+    },
+    {
+     "text": "Coming up too fast could hurt his body.",
+     "start": 50.186,
+     "end": 52.113
+    }
+   ],
+   "end": 52.563,
+   "words": [
+    {
+     "text": "But",
+     "start": 47.8,
+     "end": 47.9
+    },
+    {
+     "text": "even",
+     "start": 47.9,
+     "end": 48.12
+    },
+    {
+     "text": "then,",
+     "start": 48.12,
+     "end": 48.44
+    },
+    {
+     "text": "he",
+     "start": 48.6,
+     "end": 48.76
+    },
+    {
+     "text": "can't",
+     "start": 48.76,
+     "end": 49.08
+    },
+    {
+     "text": "just",
+     "start": 49.08,
+     "end": 49.36
+    },
+    {
+     "text": "swim",
+     "start": 49.36,
+     "end": 49.6
+    },
+    {
+     "text": "up.",
+     "start": 49.6,
+     "end": 49.92
+    },
+    {
+     "text": "Coming",
+     "start": 50.186,
+     "end": 50.44
+    },
+    {
+     "text": "up",
+     "start": 50.44,
+     "end": 50.64
+    },
+    {
+     "text": "too",
+     "start": 50.64,
+     "end": 50.82
+    },
+    {
+     "text": "fast",
+     "start": 50.82,
+     "end": 51.14
+    },
+    {
+     "text": "could",
+     "start": 51.14,
+     "end": 51.32
+    },
+    {
+     "text": "hurt",
+     "start": 51.32,
+     "end": 51.54
+    },
+    {
+     "text": "his",
+     "start": 51.54,
+     "end": 51.72
+    },
+    {
+     "text": "body.",
+     "start": 51.72,
+     "end": 52.0
+    }
+   ]
+  },
+  {
+   "id": "chamber",
+   "start": 52.563,
+   "parts": [
+    {
+     "text": "So they keep him in a special room for almost three more days,",
+     "start": 52.563,
+     "end": 55.953
+    },
+    {
+     "text": "slowly bringing him back.",
+     "start": 56.103,
+     "end": 57.577
+    }
+   ],
+   "end": 58.127,
+   "words": [
+    {
+     "text": "So",
+     "start": 52.563,
+     "end": 52.72
+    },
+    {
+     "text": "they",
+     "start": 52.72,
+     "end": 52.92
+    },
+    {
+     "text": "keep",
+     "start": 52.92,
+     "end": 53.16
+    },
+    {
+     "text": "him",
+     "start": 53.16,
+     "end": 53.4
+    },
+    {
+     "text": "in",
+     "start": 53.4,
+     "end": 53.52
+    },
+    {
+     "text": "a",
+     "start": 53.52,
+     "end": 53.64
+    },
+    {
+     "text": "special",
+     "start": 53.64,
+     "end": 53.92
+    },
+    {
+     "text": "room",
+     "start": 53.92,
+     "end": 54.26
+    },
+    {
+     "text": "for",
+     "start": 54.26,
+     "end": 54.6
+    },
+    {
+     "text": "almost",
+     "start": 54.6,
+     "end": 54.92
+    },
+    {
+     "text": "three",
+     "start": 54.92,
+     "end": 55.26
+    },
+    {
+     "text": "more",
+     "start": 55.26,
+     "end": 55.5
+    },
+    {
+     "text": "days,",
+     "start": 55.5,
+     "end": 55.84
+    },
+    {
+     "text": "slowly",
+     "start": 56.14,
+     "end": 56.48
+    },
+    {
+     "text": "bringing",
+     "start": 56.48,
+     "end": 56.78
+    },
+    {
+     "text": "him",
+     "start": 56.78,
+     "end": 57.08
+    },
+    {
+     "text": "back.",
+     "start": 57.08,
+     "end": 57.46
+    }
+   ]
+  },
+  {
+   "id": "never",
+   "start": 58.127,
+   "parts": [
+    {
+     "text": "After all that, he said he'd never go near the sea again.",
+     "start": 58.127,
+     "end": 61.065
+    }
+   ],
+   "end": 63.265,
+   "words": [
+    {
+     "text": "After",
+     "start": 58.127,
+     "end": 58.32
+    },
+    {
+     "text": "all",
+     "start": 58.32,
+     "end": 58.64
+    },
+    {
+     "text": "that,",
+     "start": 58.64,
+     "end": 58.92
+    },
+    {
+     "text": "he",
+     "start": 59.06,
+     "end": 59.18
+    },
+    {
+     "text": "said",
+     "start": 59.18,
+     "end": 59.4
+    },
+    {
+     "text": "he'd",
+     "start": 59.4,
+     "end": 59.66
+    },
+    {
+     "text": "never",
+     "start": 59.66,
+     "end": 59.9
+    },
+    {
+     "text": "go",
+     "start": 59.9,
+     "end": 60.08
+    },
+    {
+     "text": "near",
+     "start": 60.08,
+     "end": 60.24
+    },
+    {
+     "text": "the",
+     "start": 60.24,
+     "end": 60.38
+    },
+    {
+     "text": "sea",
+     "start": 60.38,
+     "end": 60.6
+    },
+    {
+     "text": "again.",
+     "start": 60.6,
+     "end": 61.02
+    }
+   ]
+  }
+ ]
+}
