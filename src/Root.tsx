@@ -10,6 +10,7 @@ import { SCENE2_DURATION, SCENE2_FPS } from "./scenes/scene2/timeline";
 import { PoseSheet } from "./shorts/airpocket/PoseSheet";
 import { ThumbAirPocket, ThumbJuliane } from "./shorts/Thumbnails";
 import { BWD_DURATION, BWD_FPS, BroWentDark } from "./shorts/browentdark/BroWentDark";
+import { PS2_DURATION, PS2_FPS, PS2Test } from "./ps2/PS2Test";
 import { CastSheet } from "./shorts/juliane/CastSheet";
 import { JULIANE_DURATION, JULIANE_FPS, Juliane } from "./shorts/juliane/Juliane";
 import { AIRPOCKET_DURATION, AIRPOCKET_FPS, AirPocket } from "./shorts/airpocket/AirPocket";
@@ -112,6 +113,10 @@ export const RemotionRoot: React.FC = () => {
       <Folder name="Bro-Went-Dark">
         {/* two-character dialogue skit, 1080x1920 */}
         <Composition id="BroWentDark" component={BroWentDark} durationInFrames={BWD_DURATION} fps={BWD_FPS} width={1080} height={1920} defaultProps={{ audio: true }} />
+      </Folder>
+      <Folder name="PS2-Style">
+        {/* rendered small on purpose; scripts/render-ps2.sh enlarges it with hard pixels to 1080x1920 */}
+        <Composition id="PS2Test" component={PS2Test} durationInFrames={PS2_DURATION} fps={PS2_FPS} width={360} height={640} />
       </Folder>
       <Folder name="Dev">
         <Composition id="StyleTest-Silhouette" component={StyleTest} durationInFrames={STYLE_TEST_DURATION} fps={30} width={1920} height={1080} />
